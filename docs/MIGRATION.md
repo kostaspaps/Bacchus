@@ -43,6 +43,8 @@ In IP.gr DNS, set TTL of the `bacchus.gr` and `www` A records to 300 s so the sw
 
 ## 4. Email sending for the website (Resend)
 
+> ✅ Done 2026-09-30: domain `bacchus.gr` verified on Resend (EU region, sending only; receiving OFF so the MX stays on IP.gr). Records `resend._domainkey` TXT, `rsend`/`send` CNAMEs, `_dmarc` TXT added in cPanel. `RESEND_API_KEY`, `FROM_EMAIL=bookings@bacchus.gr`, `OWNER_EMAIL=bacchusrestaurantgr@gmail.com` set on Vercel. Test booking delivered both emails.
+
 1. resend.com → Domains → Add `bacchus.gr`.
 2. Add the 3 records Resend shows (DKIM TXT `resend._domainkey`, SPF for `send.bacchus.gr` MX + TXT) in IP.gr DNS. These are on a subdomain and do **not** conflict with the mailbox.
 3. Wait for "Verified", then set `RESEND_API_KEY` and `FROM_EMAIL=bookings@bacchus.gr` in Vercel.
