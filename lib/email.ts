@@ -94,7 +94,7 @@ export async function notifyOwner(r: Reservation) {
   const wa = waReplyLink(r.phone, confirmText(r, lang));
   const call = `tel:${r.phone.replace(/[^\d+]/g, "")}`;
   const admin = `${SITE_URL}/admin/reservations/${r.id}`;
-  const quick = `${SITE_URL}/q/${r.id}?k=${await quickKey(r.id)}`;
+  const quick = `${SITE_URL}/q/${r.id}/${await quickKey(r.id)}`;
   const subject = `Booking request · ${r.date} ${r.time} · ${r.guests} pax · ${r.name}`;
   const rows: [string, string][] = [
     ["Name", r.name],

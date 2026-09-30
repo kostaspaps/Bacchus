@@ -32,7 +32,7 @@ export async function notifyOwnerWhatsApp(r: Reservation): Promise<boolean> {
 }
 
 export async function ownerWhatsAppText(r: Reservation) {
-  const quick = `${SITE_URL}/q/${r.id}?k=${await quickKey(r.id)}`;
+  const quick = `${SITE_URL}/q/${r.id}/${await quickKey(r.id)}`;
   const wa = waReplyLink(r.phone, confirmText(r, r.language));
   const guests = r.guests === 1 ? "1 guest" : `${r.guests} guests`;
   const lines = [

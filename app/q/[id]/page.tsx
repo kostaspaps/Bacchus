@@ -14,10 +14,10 @@ export const metadata: Metadata = { title: "Table request · Bacchus", robots: {
  * Signed with the reservation id, so no login is needed. Confirm / decline
  * updates the request and emails the guest; then offers the prefilled WhatsApp reply.
  */
-export default async function QuickPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<Record<string, string | undefined>> }) {
-  const { id } = await params;
+export default async function QuickPage({ params, searchParams }: { params: Promise<{ id: string; k?: string }>; searchParams: Promise<Record<string, string | undefined>> }) {
+  const { id, k: pathKey } = await params;
   const sp = await searchParams;
-  const k = sp.k || "";
+  const k = pathKey || sp.k || "";
   if (!(await verifyQuickKey(id, k))) notFound();
   const r = await getReservation(id);
   if (!r) notFound();

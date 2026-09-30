@@ -25,5 +25,5 @@ export async function quickSetStatus(formData: FormData) {
   }
   revalidatePath("/admin");
   revalidatePath(`/admin/reservations/${id}`);
-  redirect(`/q/${id}?k=${k}&done=${status}&emailed=${emailed ? 1 : 0}`);
+  redirect(`/q/${id}/${k}?done=${status}&emailed=${emailed ? 1 : 0}`);
 }
