@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { verifyQuickKey } from "@/lib/admin-session";
 import { getReservation } from "@/lib/db";
-import { confirmText, declineText, formatDate } from "@/lib/email";
+import { formatDate, ownerReplies } from "@/lib/email";
 import { waReplyLink } from "@/lib/whatsapp";
 import { quickSetStatus } from "../actions";
 
@@ -25,8 +25,7 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
   const done = sp.done === "confirmed" || sp.done === "declined" ? sp.done : null;
   const emailed = sp.emailed === "1";
   const tel = `tel:${r.phone.replace(/[^\d+]/g, "")}`;
-  const waConfirm = waReplyLink(r.phone, confirmText(r, r.language));
-  const waDecline = waReplyLink(r.phone, declineText(r, r.language));
+  const replies = ownerReplies(r, r.language);
   const rows: [string, string][] = [
     ["Name", r.name],
     ["Date", formatDate(r.date, "en")],
@@ -96,9 +95,16 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
       )}
 
       <div className="grid gap-3">
-        <a href={done === "declined" ? waDecline : waConfirm} className={`${btn} bg-wine hover:bg-wine-dark`}>
-          💬 {done === "declined" ? "Tell the guest on WhatsApp" : "Confirm on WhatsApp too"}
-        </a>
+        <p className="label text-olive m-0 mt-2">💬 Reply on WhatsApp · ready-made ({r.language === "el" ? "Greek" : "English"}, tap to open, edit before sending)</p>
+        {replies.map((x) => (
+          <a
+            key={x.key}
+            href={waReplyLink(r.phone, x.text)}
+            className={x.key === "confirm" || x.key === "okToday" ? `${btn} bg-wine hover:bg-wine-dark` : outline}
+          >
+            {x.label}
+          </a>
+        ))}
         <a href={tel} className={outline}>
           📞 Call {r.phone}
         </a>

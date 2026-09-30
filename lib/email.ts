@@ -69,7 +69,14 @@ function esc(s: string) {
 }
 
 export function confirmText(r: Reservation, lang: Lang) {
-  return fill(messages.ownerReplyConfirm[lang], { name: r.name, guests: r.guests, date: formatDate(r.date, lang), time: r.time });
+  return fill(messages.ownerReplies.confirm[lang], { name: r.name, guests: r.guests, date: formatDate(r.date, lang), time: r.time });
+}
+
+export type OwnerReply = { key: string; label: string; text: string };
+/** Ready-made WhatsApp replies for the owner (confirm / OK today / full → tomorrow / other time / please call / decline). */
+export function ownerReplies(r: Reservation, lang: Lang): OwnerReply[] {
+  const vars = { name: r.name, guests: r.guests, date: formatDate(r.date, lang), time: r.time, phone_restaurant: PHONE_DISPLAY };
+  return Object.entries(messages.ownerReplies).map(([key, t]) => ({ key, label: t.label[lang], text: fill(t[lang], vars) }));
 }
 
 export function declineText(r: Reservation, lang: Lang, alternatives = "…") {

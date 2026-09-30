@@ -34,5 +34,55 @@
   "guestDeclinedBody": {
     "en": "Hello {name},\n\nUnfortunately we cannot offer a table for {guests} on {date} at {time}. Please message us on WhatsApp ({whatsapp}) and we will find another time that works.\n\nYana & family\nBacchus Restaurant · Messonghi Beach · Corfu",
     "el": "Γεια σας {name},\n\nΔυστυχώς δεν μπορούμε να προσφέρουμε τραπέζι για {guests} άτομα στις {date} στις {time}. Στείλτε μας μήνυμα στο WhatsApp ({whatsapp}) και θα βρούμε μια άλλη ώρα που να σας βολεύει.\n\nΓιάννα & οικογένεια\nΕστιατόριο Βάκχος · Παραλία Μεσογγής · Κέρκυρα"
+  },
+  "ownerReplies": {
+    "confirm": {
+      "label": {
+        "en": "✅ Confirmed",
+        "el": "✅ Επιβεβαίωση"
+      },
+      "en": "Hello {name}! 🍷 Your table for {guests} on {date} at {time} is confirmed. We look forward to welcoming you at Bacchus, right on Messonghi Beach. See you by the sea! 🌊",
+      "el": "Γεια σας {name}! 🍷 Το τραπέζι σας για {guests} άτομα στις {date} στις {time} επιβεβαιώθηκε. Σας περιμένουμε στον Βάκχο, πάνω στην παραλία Μεσογγής. Τα λέμε δίπλα στη θάλασσα! 🌊"
+    },
+    "okToday": {
+      "label": {
+        "en": "👍 OK for today",
+        "el": "👍 ΟΚ για σήμερα"
+      },
+      "en": "Hello {name}! 👍 Yes, that works — we'll have a table for {guests} ready for you today at {time}. See you soon at Bacchus, Messonghi Beach 🌊",
+      "el": "Γεια σας {name}! 👍 Ναι, μπορούμε — θα έχουμε έτοιμο τραπέζι για {guests} άτομα σήμερα στις {time}. Τα λέμε σύντομα στον Βάκχο, παραλία Μεσογγής 🌊"
+    },
+    "fullTomorrow": {
+      "label": {
+        "en": "📅 Full today — tomorrow same time?",
+        "el": "📅 Πλήρεις σήμερα — αύριο ίδια ώρα;"
+      },
+      "en": "Hello {name}, thank you for your request! 🙏 Unfortunately we are fully booked on {date} at {time}. Could we offer you the same time the next day, or an earlier/later table on {date}? Tell us what suits you and we'll hold it for you.",
+      "el": "Γεια σας {name}, ευχαριστούμε για το αίτημά σας! 🙏 Δυστυχώς είμαστε πλήρεις στις {date} στις {time}. Θα σας βόλευε η ίδια ώρα την επόμενη μέρα, ή νωρίτερα/αργότερα στις {date}; Πείτε μας τι σας εξυπηρετεί και θα το κρατήσουμε για εσάς."
+    },
+    "otherTime": {
+      "label": {
+        "en": "⏰ Different time?",
+        "el": "⏰ Άλλη ώρα;"
+      },
+      "en": "Hello {name}! {time} on {date} is already full, but we could seat {guests} a little earlier or later that evening. Which time would work best for you? 🍷",
+      "el": "Γεια σας {name}! Στις {time} στις {date} είμαστε ήδη πλήρεις, αλλά μπορούμε να σας βάλουμε λίγο νωρίτερα ή αργότερα το ίδιο βράδυ. Ποια ώρα σας βολεύει; 🍷"
+    },
+    "pleaseCall": {
+      "label": {
+        "en": "📞 Please call us",
+        "el": "📞 Καλέστε μας"
+      },
+      "en": "Hello {name}, thank you for your request. 🙏 We can't confirm a table for {guests} on {date} at {time} from here — please give us a quick call at {phone_restaurant} outside our busy hours (before 19:00 or after 22:30) and we'll do our best to find you a spot.",
+      "el": "Γεια σας {name}, ευχαριστούμε για το αίτημά σας. 🙏 Δεν μπορούμε να επιβεβαιώσουμε από εδώ τραπέζι για {guests} άτομα στις {date} στις {time} — καλέστε μας στο {phone_restaurant} εκτός ωρών αιχμής (πριν τις 19:00 ή μετά τις 22:30) και θα κάνουμε ό,τι μπορούμε."
+    },
+    "decline": {
+      "label": {
+        "en": "❌ Not possible",
+        "el": "❌ Δεν είναι εφικτό"
+      },
+      "en": "Hello {name}, thank you for thinking of us. Unfortunately we cannot take a table for {guests} on {date} at {time}. We hope to welcome you at Bacchus another day — you're always welcome by the sea. 🌊",
+      "el": "Γεια σας {name}, ευχαριστούμε που μας σκεφτήκατε. Δυστυχώς δεν μπορούμε να δεχτούμε τραπέζι για {guests} άτομα στις {date} στις {time}. Ελπίζουμε να σας καλωσορίσουμε στον Βάκχο μια άλλη μέρα — είστε πάντα ευπρόσδεκτοι δίπλα στη θάλασσα. 🌊"
+    }
   }
 }

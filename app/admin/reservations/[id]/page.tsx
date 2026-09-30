@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { confirmText, declineText, formatDate } from "@/lib/email";
+import { formatDate, ownerReplies } from "@/lib/email";
 import { RESERVATION_STATUSES } from "@/lib/schema";
 import { isAdmin } from "@/lib/admin-auth";
 import { getReservation } from "@/lib/db";
@@ -58,10 +58,11 @@ export default async function ReservationPage({ params }: { params: Promise<{ id
           <section>
             <h2 className="label text-olive mb-3">Reply to guest</h2>
             <div className="flex flex-wrap gap-2">
-              <a href={waReplyLink(r.phone, confirmText(r, "en"))} target="_blank" rel="noopener" className={btn}>WhatsApp · confirm (EN)</a>
-              <a href={waReplyLink(r.phone, confirmText(r, "el"))} target="_blank" rel="noopener" className={btn}>WhatsApp · επιβεβαίωση (GR)</a>
-              <a href={waReplyLink(r.phone, declineText(r, "en"))} target="_blank" rel="noopener" className={btnOutline}>WhatsApp · decline (EN)</a>
-              <a href={waReplyLink(r.phone, declineText(r, "el"))} target="_blank" rel="noopener" className={btnOutline}>WhatsApp · απόρριψη (GR)</a>
+              {ownerReplies(r, r.language).map((x) => (
+                <a key={x.key} href={waReplyLink(r.phone, x.text)} target="_blank" rel="noopener" className={x.key === "confirm" || x.key === "okToday" ? btn : btnOutline}>
+                  WhatsApp · {x.label}
+                </a>
+              ))}
               <a href={tel} className={btnOutline}>Call</a>
               {r.email && <a href={`mailto:${r.email}`} className={btnOutline}>Email</a>}
             </div>
