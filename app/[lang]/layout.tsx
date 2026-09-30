@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, GFS_Didot, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Manrope, Noto_Serif_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import "../globals.css";
@@ -18,7 +18,20 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   display: "swap",
 });
-const gfsDidot = GFS_Didot({ subsets: ["greek"], weight: "400", variable: "--font-gfs-didot", display: "swap" });
+/*
+ * Greek headline face: Cormorant Garamond has no Greek glyphs, so --font-serif (globals.css) lists
+ * "Cormorant Garamond" then "Noto Serif Display" by literal family name. Latin resolves to Cormorant,
+ * Greek falls through to Noto Light. Literal names skip next/font's local "Fallback" faces, which
+ * carry no unicode-range and would otherwise capture the other script.
+ */
+const greekSerif = Noto_Serif_Display({
+  subsets: ["greek"],
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  variable: "--font-greek-serif",
+  display: "swap",
+  adjustFontFallback: false,
+});
 const manrope = Manrope({ subsets: ["latin", "greek"], weight: ["300", "400", "500", "600"], variable: "--font-manrope", display: "swap" });
 
 export const viewport: Viewport = {
@@ -45,7 +58,7 @@ export default async function RootLayout({ children, params }: { children: React
   if (!isLang(raw)) notFound();
   const lang: Lang = raw;
   return (
-    <html lang={htmlLang(lang)} className={`${cormorant.variable} ${gfsDidot.variable} ${manrope.variable}`}>
+    <html lang={htmlLang(lang)} className={`${cormorant.variable} ${greekSerif.variable} ${manrope.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd()) }} />
       </head>

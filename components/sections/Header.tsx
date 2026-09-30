@@ -44,7 +44,7 @@ export default function Header() {
       hrefLang={l === "el" ? "el" : "en"}
       lang={l === "el" ? "el" : "en"}
       aria-current={lang === l ? "true" : undefined}
-      className={`p-2 -m-2 ${lang === l ? "opacity-100" : "opacity-50 hover:opacity-100"}`}
+      className={`p-2 -m-2 ${lang === l ? "opacity-100" : "opacity-70 hover:opacity-100"}`}
     >
       {label}
     </Link>

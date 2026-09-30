@@ -41,7 +41,7 @@ export default function Catch({ lang }: { lang: Lang }) {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-5 items-end">
           <Frame tone="sea" pad={10} reveal="mask" caption={t.capLangoustines} className="col-span-full">
             <div className="relative aspect-[4/3] overflow-hidden">
-              <Image data-parallax="0.05" src="/images/food/seafood-tray-langoustines.jpg" alt={t.altLangoustines} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" style={{ objectPosition: "center 50%", height: "112%" }} />
+              <Image data-parallax="0.05" src="/images/food/seafood-tray-langoustines.jpg" alt={t.altLangoustines} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" style={{ objectPosition: "center 50%", height: "112%" }} />
             </div>
           </Frame>
           <Frame tone="sea" pad={10} caption={t.capGrill}>

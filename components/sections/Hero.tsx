@@ -14,7 +14,7 @@ export default function Hero({ lang }: { lang: Lang }) {
             <span className="inline-block w-8 h-px bg-wine" aria-hidden="true" />
             {t.place}
           </p>
-          <h1 id="hero-title" className="font-serif font-light text-[clamp(64px,10.5vw,168px)] leading-[.9] tracking-[-.01em] m-0 mb-7">
+          <h1 id="hero-title" className="font-serif font-light text-[clamp(64px,10.5vw,168px)] el:text-[clamp(50px,8.2vw,128px)] leading-[.9] tracking-[-.01em] m-0 mb-7">
             {t.h1a}
             <br />
             {t.h1b}

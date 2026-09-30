@@ -39,8 +39,8 @@ export const reservationSchema = z.object({
   utm_content: z.string().max(200).optional(),
   utm_term: z.string().max(200).optional(),
   gclid: z.string().max(200).optional(),
-  /** Honeypot — must be empty. */
-  website: z.string().max(0).optional().default(""),
+  /** Honeypot — must be empty (checked in the route so bots get a fake 200). */
+  website: z.string().max(500).optional().default(""),
 });
 
 export type ReservationInput = z.infer<typeof reservationSchema>;

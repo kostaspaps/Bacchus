@@ -57,7 +57,7 @@ export default async function Book({ params }: { params: Promise<{ lang: string 
           </Link>
           <div className="relative anim-rise" style={{ animationDuration: ".9s" }}>
             <p className="label opacity-80 m-0 mb-4">{t.place}</p>
-            <h1 className="font-serif font-light text-[clamp(44px,6vw,88px)] leading-[.95] m-0 mb-5">
+            <h1 className="font-serif font-light text-[clamp(44px,6vw,88px)] el:text-[clamp(36px,4.8vw,72px)] leading-[.95] m-0 mb-5">
               {t.bpTitle1}
               <br />
               {t.bpTitle2}

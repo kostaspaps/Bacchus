@@ -63,4 +63,4 @@ node scripts/generate-assets.mjs   # regenerate favicon, apple icon, OG images
 - High-res scan of Dimitris & Yana (currently the 800×600 legacy photo, now hosted locally at `public/images/heritage/dimitris-and-yana-early-years.jpg`).
 - Instagram / Facebook URLs (`NEXT_PUBLIC_INSTAGRAM_URL`, `NEXT_PUBLIC_FACEBOOK_URL`), Google Place ID for a live rating.
 - `lib/config.ts` → `GEO` is approximate; copy the exact pin from Google Business Profile.
-- Cormorant Garamond has no Greek glyphs; Greek headlines fall back to GFS Didot (loaded via `next/font`). Swap if a different Greek serif is preferred.
+- Cormorant Garamond has no Greek glyphs; Greek headlines fall back to Noto Serif Display Light (loaded via `next/font`). Swap if a different Greek serif is preferred.

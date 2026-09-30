@@ -32,4 +32,4 @@ Kept as-is (checked, correct): intro, story 2–3, Yana 1, catch, menu, wine, ga
 - Reviews stay in English (they are quotes) — the label reads «Επισκέπτης TripAdvisor».
 - Names: Δημήτρης, Γιάννα. Brand in Greek: ΒΑΚΧΟΣ / Βάκχος; place: Μεσογγή.
 - Uppercase Greek drops accents except the dialytika (ΜΑΪΟ).
-- Greek headlines render in GFS Didot because Cormorant Garamond has no Greek glyphs.
+- Greek headlines render in Noto Serif Display Light because Cormorant Garamond has no Greek glyphs.

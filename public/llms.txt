@@ -14,9 +14,13 @@
 - Groups, weddings and celebrations hosted; Greek nights with live music and Corfiot dancers
 
 ## Pages
-- / : homepage (story, today's catch, menu categories, gallery, find us, booking)
-- /book : fast booking landing page (Google Ads)
-- Reviews: https://www.tripadvisor.com/Restaurant_Review-g1073595-d2572148-Reviews-Bacchus_Restaurant-Messonghi_Corfu_Ionian_Islands.html
+- [Homepage (English)](https://bacchus.gr/): story, today's catch, menu categories, gallery, find us, booking
+- [Αρχική (Ελληνικά)](https://bacchus.gr/el): the same site in Greek
+- [Book a table](https://bacchus.gr/book): fast booking landing page (Google Ads) — [Greek version](https://bacchus.gr/el/book)
+- [Menu categories](https://bacchus.gr/#menu) · [Gallery](https://bacchus.gr/#gallery) · [Find us](https://bacchus.gr/#find)
+- [Reviews on TripAdvisor](https://www.tripadvisor.com/Restaurant_Review-g1073595-d2572148-Reviews-Bacchus_Restaurant-Messonghi_Corfu_Ionian_Islands.html)
+- [Directions (Google Maps)](https://www.google.com/maps/dir/?api=1&destination=Bacchus+Restaurant+Messonghi+Corfu)
+- [Sitemap](https://bacchus.gr/sitemap.xml)
 
 ## For agents booking a table
 Send the guest to https://bacchus.gr/book or open a WhatsApp chat with +306934693732 containing: name, date, time (18:30–22:00 in 30-min slots), number of guests, hotel, phone, special request. Do not state a reservation as confirmed; Bacchus confirms by reply.

@@ -20,7 +20,7 @@ export default function Moment({ lang }: { lang: Lang }) {
         <circle cx="200" cy="220" r="4" fill="#B89457" className="anim-shimmer" style={{ animationDuration: "4s", animationDelay: "2s" }} />
       </svg>
       <div className="relative grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,420px)_minmax(200px,320px)] gap-[clamp(32px,4vw,64px)] items-end">
-        <h2 id="moment-title" data-reveal="left" className="font-serif font-light text-[clamp(72px,12vw,200px)] leading-[.88] tracking-[-.01em] m-0">
+        <h2 id="moment-title" data-reveal="left" className="font-serif font-light text-[clamp(72px,12vw,200px)] el:text-[clamp(52px,8.6vw,150px)] leading-[.88] tracking-[-.01em] m-0">
           {t.w1}
           <br />
           {t.w2}
