@@ -44,6 +44,9 @@ Copy and UI strings live in `lib/i18n.ts` (`en` / `el`). Greek review notes: [`d
 
 1. **Database** — Neon Postgres via the Vercel marketplace (free plan, no auto-pausing): Vercel → Storage → Neon, connect to the `bacchus` project; it injects `DATABASE_URL`. Then run `db/schema.sql` once in the Neon SQL editor. Set `ADMIN_PASSWORD` for `/admin`.
 2. **Email** — sign up at resend.com, add domain `bacchus.gr`, add its 3 DNS records at IP.gr, set `RESEND_API_KEY`, `OWNER_EMAIL`, `FROM_EMAIL`. (Fallback: `SMTP_*` for the IP.gr mailbox.)
+3. **Owner WhatsApp push** (guest needs no WhatsApp) — set `WHATSAPP_OWNER_NUMBER` (digits, e.g. `306934693732`) plus one provider:
+   - `CALLMEBOT_APIKEY` — free bridge. Owner adds +34 644 51 95 23 to contacts and sends "I allow callmebot to send me messages" on WhatsApp; the bot replies with the API key.
+   - or `WHATSAPP_CLOUD_TOKEN` + `WHATSAPP_CLOUD_PHONE_ID` (+ `WHATSAPP_CLOUD_TEMPLATE`, `WHATSAPP_CLOUD_TEMPLATE_LANG`) — Meta WhatsApp Business Cloud API, needs a separate business number and an approved template.
 3. **Vercel** — project `bacchus` in the Lupe Analytics team (Hobby plan). Public env vars and both domains are already set; canonical host is `https://www.bacchus.gr`. Deploy with `pnpm exec vercel deploy --prod`.
 4. **DNS / go-live** — follow [`docs/MIGRATION.md`](docs/MIGRATION.md) step by step (the old server also hosts the mailbox — read the warning there first).
 5. **Analytics** — `NEXT_PUBLIC_GTM_ID` (or GA4 / Meta Pixel). Events pushed to `dataLayer`: `view_booking`, `start_booking`, `submit_booking`, `whatsapp_booking_click`, `directions_click`, `phone_click`, `menu_view`. UTM / gclid persist in `sessionStorage` and are stored with each request.
