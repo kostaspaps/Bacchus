@@ -4,6 +4,7 @@ import { useLang } from "@/components/LangProvider";
 import { getUtm, track } from "@/lib/analytics";
 import { BOOKING_SLOTS, MAX_GUESTS } from "@/lib/config";
 import { localeTag } from "@/lib/i18n";
+import { normalizePhone } from "@/lib/phone";
 import { openWhatsApp, waLink, waText, type BookingFields } from "@/lib/whatsapp";
 
 export type Fields = BookingFields & { email: string; hp: string };
@@ -60,6 +61,9 @@ export default function BookingForm({
     if (!f.time) return setError(t.bkErrTime);
     if (!f.name.trim() || !f.date || !f.phone.trim()) return setError(t.bkErrRequired);
     if (f.date < today) return setError(t.bkErrDate);
+    const phone = normalizePhone(f.phone);
+    if (!phone) return setError(t.bkErrPhone);
+    if (phone !== f.phone) setF((s) => ({ ...s, phone }));
 
     const utm = getUtm();
     track("submit_booking", { guests: f.guests, source, ...utm });
@@ -75,7 +79,7 @@ export default function BookingForm({
           time: f.time,
           guests: f.guests,
           hotel: f.hotel,
-          phone: f.phone,
+          phone,
           email: f.email,
           special_request: f.notes,
           language: lang,

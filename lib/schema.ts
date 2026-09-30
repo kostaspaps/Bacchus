@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { BOOKING_SLOTS, MAX_GUESTS } from "./config";
+import { normalizePhone } from "./phone";
 
 const dateRe = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -28,7 +29,14 @@ export const reservationSchema = z.object({
     .trim()
     .min(6)
     .max(24)
-    .regex(/^[+\d][\d\s().-]{5,23}$/, "Invalid phone"),
+    .transform((v, ctx) => {
+      const n = normalizePhone(v);
+      if (!n) {
+        ctx.addIssue({ code: "custom", message: "Phone must include a country code, e.g. +44" });
+        return z.NEVER;
+      }
+      return n;
+    }),
   email: z.union([z.literal(""), z.string().trim().email().max(120)]).optional().default(""),
   special_request: z.string().trim().max(500).optional().default(""),
   language: z.enum(["en", "el"]).default("en"),
