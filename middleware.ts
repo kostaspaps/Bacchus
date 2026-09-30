@@ -4,6 +4,7 @@ import { ADMIN_COOKIE, verifySessionValue } from "@/lib/admin-session";
 /**
  * 1. Locale routing: English at "/", Greek at "/el" — both served from app/[lang].
  * 2. /admin guard: requires a valid owner session cookie (see lib/admin-session.ts).
+ * 3. /q/<id>?k=… owner one-tap confirm/decline links (signed, no cookie).
  */
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -21,6 +22,7 @@ export async function middleware(req: NextRequest) {
   }
 
   if (pathname === "/el" || pathname.startsWith("/el/")) return NextResponse.next();
+  if (pathname.startsWith("/q/")) return NextResponse.next();
 
   const url = req.nextUrl.clone();
   url.pathname = pathname === "/" ? "/en" : `/en${pathname}`;

@@ -5,6 +5,7 @@ import type { Lang } from "./i18n";
 import { localeTag } from "./i18n";
 import type { Reservation } from "./schema";
 import { fill, waReplyLink } from "./whatsapp";
+import { quickKey } from "./admin-session";
 
 type Mail = { to: string; subject: string; text: string; html?: string; replyTo?: string };
 
@@ -86,6 +87,7 @@ export async function notifyOwner(r: Reservation) {
   const wa = waReplyLink(r.phone, confirmText(r, lang));
   const call = `tel:${r.phone.replace(/[^\d+]/g, "")}`;
   const admin = `${SITE_URL}/admin/reservations/${r.id}`;
+  const quick = `${SITE_URL}/q/${r.id}?k=${await quickKey(r.id)}`;
   const subject = `Booking request · ${r.date} ${r.time} · ${r.guests} pax · ${r.name}`;
   const rows: [string, string][] = [
     ["Name", r.name],
@@ -107,6 +109,7 @@ export async function notifyOwner(r: Reservation) {
     "",
     ...rows.map(([k, v]) => `${k}: ${v}`),
     "",
+    `Confirm or decline (one tap, emails the guest): ${quick}`,
     `Reply on WhatsApp: ${wa}`,
     `Call: ${call}`,
     `Admin: ${admin}`,
@@ -118,9 +121,10 @@ export async function notifyOwner(r: Reservation) {
   <table style="border-collapse:collapse;font-size:14px;width:100%">
     ${rows.map(([k, v]) => `<tr><td style="padding:6px 12px 6px 0;color:#596441;font-size:11px;letter-spacing:.16em;text-transform:uppercase;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:6px 0">${esc(v)}</td></tr>`).join("")}
   </table>
-  <p style="margin:28px 0 12px"><a href="${wa}" style="display:inline-block;background:#4A1028;color:#F4EFE5;padding:14px 22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none">Reply on WhatsApp</a>
+  <p style="margin:28px 0 12px"><a href="${quick}" style="display:inline-block;background:#596441;color:#F4EFE5;padding:14px 22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none">Confirm / decline</a>
+  &nbsp; <a href="${wa}" style="display:inline-block;background:#4A1028;color:#F4EFE5;padding:14px 22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none">Reply on WhatsApp</a>
   &nbsp; <a href="${call}" style="display:inline-block;border:1px solid #1B0B11;color:#1B0B11;padding:13px 22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-decoration:none">Call</a></p>
-  <p style="font-size:12px;color:#596441"><a href="${admin}" style="color:#4A1028">Open in admin</a> · status: pending</p>
+  <p style="font-size:12px;color:#596441">Confirm / decline updates the request and emails the guest automatically (if they gave an email). <a href="${admin}" style="color:#4A1028">Open in admin</a> · status: pending</p>
 </div>`;
   return sendMail({ to, subject, text, html, replyTo: r.email || undefined });
 }

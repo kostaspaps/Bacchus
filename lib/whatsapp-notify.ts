@@ -2,6 +2,7 @@ import { SITE_URL } from "./config";
 import { formatDate, confirmText } from "./email";
 import type { Reservation } from "./schema";
 import { waReplyLink } from "./whatsapp";
+import { quickKey } from "./admin-session";
 
 /**
  * Push a new table request into the owner's WhatsApp (server-side, guest needs no WhatsApp).
@@ -18,7 +19,7 @@ export async function notifyOwnerWhatsApp(r: Reservation): Promise<boolean> {
   const to = (process.env.WHATSAPP_OWNER_NUMBER || "").replace(/[^\d]/g, "");
   if (!to) return false;
 
-  const text = ownerWhatsAppText(r);
+  const text = await ownerWhatsAppText(r);
 
   if (process.env.WHATSAPP_CLOUD_TOKEN && process.env.WHATSAPP_CLOUD_PHONE_ID) {
     return sendViaCloudApi(to, text, r);
@@ -30,18 +31,28 @@ export async function notifyOwnerWhatsApp(r: Reservation): Promise<boolean> {
   return false;
 }
 
-export function ownerWhatsAppText(r: Reservation) {
+export async function ownerWhatsAppText(r: Reservation) {
+  const quick = `${SITE_URL}/q/${r.id}?k=${await quickKey(r.id)}`;
+  const wa = waReplyLink(r.phone, confirmText(r, r.language));
+  const guests = r.guests === 1 ? "1 guest" : `${r.guests} guests`;
   const lines = [
-    `🍷 New table request`,
-    `${r.name} · ${r.guests} pax`,
-    `${formatDate(r.date, "en")} · ${r.time}`,
-    r.hotel ? `Hotel: ${r.hotel}` : null,
-    `Phone: ${r.phone}`,
-    r.email ? `Email: ${r.email}` : null,
-    r.special_request ? `Note: ${r.special_request}` : null,
+    `🍷 *Bacchus – new table request!*`,
     ``,
-    `Reply: ${waReplyLink(r.phone, confirmText(r, r.language))}`,
-    `Admin: ${SITE_URL}/admin/reservations/${r.id}`,
+    `👤 *${r.name}* · ${guests}`,
+    `📅 ${formatDate(r.date, "en")} at *${r.time}*`,
+    r.hotel ? `🏨 ${r.hotel}` : null,
+    `📞 ${r.phone}`,
+    r.email ? `✉️ ${r.email}` : null,
+    r.special_request ? `📝 "${r.special_request}"` : null,
+    r.language === "el" ? `🇬🇷 Greek-speaking guest` : null,
+    ``,
+    `✅ Confirm or ❌ decline with one tap (the guest gets an email automatically):`,
+    quick,
+    ``,
+    `💬 Or reply on WhatsApp:`,
+    wa,
+    ``,
+    `Καλή δουλειά! 🌊`,
   ];
   return lines.filter((l) => l !== null).join("\n");
 }
