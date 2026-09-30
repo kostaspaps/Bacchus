@@ -1,7 +1,6 @@
 import { SITE_URL } from "./config";
-import { formatDate, confirmText } from "./email";
+import { formatDate } from "./email";
 import type { Reservation } from "./schema";
-import { waReplyLink } from "./whatsapp";
 import { quickKey } from "./admin-session";
 
 /**
@@ -32,8 +31,7 @@ export async function notifyOwnerWhatsApp(r: Reservation): Promise<boolean> {
 }
 
 export async function ownerWhatsAppText(r: Reservation) {
-  const quick = `${SITE_URL}/q/${r.id}/${await quickKey(r.id)}`;
-  const wa = waReplyLink(r.phone, confirmText(r, r.language));
+  const quick = `${SITE_URL.replace(/^https?:\/\/(www\.)?/, "")}/q/${r.id.slice(0, 8)}/${await quickKey(r.id)}`;
   const guests = r.guests === 1 ? "1 guest" : `${r.guests} guests`;
   const lines = [
     `🍷 *Bacchus – new table request!*`,
@@ -46,11 +44,8 @@ export async function ownerWhatsAppText(r: Reservation) {
     r.special_request ? `📝 "${r.special_request}"` : null,
     r.language === "el" ? `🇬🇷 Greek-speaking guest` : null,
     ``,
-    `✅ Confirm or ❌ decline with one tap (the guest gets an email automatically):`,
+    `👉 Tap to confirm, decline or reply to the guest:`,
     quick,
-    ``,
-    `💬 Or reply on WhatsApp:`,
-    wa,
     ``,
     `Καλή δουλειά! 🌊`,
   ];

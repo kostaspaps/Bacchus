@@ -54,9 +54,12 @@ export const sessionCookieOptions = {
 
 /** One-tap owner links (/q/<id>?k=…): HMAC of the reservation id, no login needed on the phone. */
 export async function quickKey(id: string) {
-  return (await hmac(`quick:${id}`)).slice(0, 32);
+  return (await hmac(`quick:${id}`)).slice(0, 16);
 }
+/** Accepts the 16-char key (current) or the older 32-char key (links already sent). */
 export async function verifyQuickKey(id: string, key: string | undefined | null) {
   if (!id || !key || !secret()) return false;
-  return timingSafeEqual(await quickKey(id), key);
+  if (key.length !== 16 && key.length !== 32) return false;
+  const full = (await hmac(`quick:${id}`)).slice(0, key.length);
+  return timingSafeEqual(full, key);
 }

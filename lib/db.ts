@@ -64,6 +64,14 @@ export async function listReservations(limit = 300) {
   return (rows as Row[]).map(toReservation);
 }
 
+/** Resolve a short id (first 8 hex chars, used in WhatsApp links) or a full uuid to one reservation. */
+export async function resolveReservationId(idOrPrefix: string): Promise<string | null> {
+  if (/^[0-9a-f-]{36}$/i.test(idOrPrefix)) return idOrPrefix;
+  if (!/^[0-9a-f]{8}$/i.test(idOrPrefix)) return null;
+  const rows = await sql()`select id from reservations where id::text like ${idOrPrefix.toLowerCase() + "%"} limit 2`;
+  return rows.length === 1 ? String((rows[0] as { id: string }).id) : null;
+}
+
 export async function getReservation(id: string) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
   const rows = await sql()`select * from reservations where id = ${id}::uuid`;

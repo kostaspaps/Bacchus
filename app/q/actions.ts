@@ -2,16 +2,16 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { verifyQuickKey } from "@/lib/admin-session";
-import { updateReservationStatus } from "@/lib/db";
+import { resolveReservationId, updateReservationStatus } from "@/lib/db";
 import { notifyGuestStatus } from "@/lib/email";
 import type { ReservationStatus } from "@/lib/schema";
 
 /** Owner one-tap confirm/decline from the email or WhatsApp alert (signed link, no login). */
 export async function quickSetStatus(formData: FormData) {
-  const id = String(formData.get("id") || "");
+  const id = (await resolveReservationId(String(formData.get("id") || ""))) || "";
   const k = String(formData.get("k") || "");
   const status = String(formData.get("status") || "") as ReservationStatus;
-  if (!(await verifyQuickKey(id, k))) redirect("/admin/login");
+  if (!id || !(await verifyQuickKey(id, k))) redirect("/admin/login");
   if (status !== "confirmed" && status !== "declined") return;
 
   const { reservation: updated, changed } = await updateReservationStatus(id, status);
@@ -25,5 +25,5 @@ export async function quickSetStatus(formData: FormData) {
   }
   revalidatePath("/admin");
   revalidatePath(`/admin/reservations/${id}`);
-  redirect(`/q/${id}/${k}?done=${status}&emailed=${emailed ? 1 : 0}&changed=${changed ? 1 : 0}`);
+  redirect(`/q/${id.slice(0, 8)}/${k}?done=${status}&emailed=${emailed ? 1 : 0}&changed=${changed ? 1 : 0}`);
 }

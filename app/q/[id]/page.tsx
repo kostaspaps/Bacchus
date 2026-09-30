@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { verifyQuickKey } from "@/lib/admin-session";
-import { getReservation } from "@/lib/db";
+import { getReservation, resolveReservationId } from "@/lib/db";
 import { formatDate, ownerReplies } from "@/lib/email";
 import { waReplyLink } from "@/lib/whatsapp";
 import { quickSetStatus } from "../actions";
@@ -15,10 +15,11 @@ export const metadata: Metadata = { title: "Table request · Bacchus", robots: {
  * updates the request and emails the guest; then offers the prefilled WhatsApp reply.
  */
 export default async function QuickPage({ params, searchParams }: { params: Promise<{ id: string; k?: string }>; searchParams: Promise<Record<string, string | undefined>> }) {
-  const { id, k: pathKey } = await params;
+  const { id: idParam, k: pathKey } = await params;
   const sp = await searchParams;
   const k = pathKey || sp.k || "";
-  if (!(await verifyQuickKey(id, k))) notFound();
+  const id = await resolveReservationId(idParam);
+  if (!id || !(await verifyQuickKey(id, k))) notFound();
   const r = await getReservation(id);
   if (!r) notFound();
 
