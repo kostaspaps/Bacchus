@@ -2,8 +2,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { confirmText, declineText, formatDate } from "@/lib/email";
 import { RESERVATION_STATUSES } from "@/lib/schema";
-import { getReservation } from "@/lib/supabase";
-import { currentAdmin } from "@/lib/supabase-auth";
+import { isAdmin } from "@/lib/admin-auth";
+import { getReservation } from "@/lib/db";
 import { waReplyLink } from "@/lib/whatsapp";
 import { setStatus } from "../../actions";
 import { StatusBadge } from "../../ui";
@@ -11,8 +11,7 @@ import { StatusBadge } from "../../ui";
 export const dynamic = "force-dynamic";
 
 export default async function ReservationPage({ params }: { params: Promise<{ id: string }> }) {
-  const admin = await currentAdmin();
-  if (!admin) redirect("/admin/login");
+  if (!(await isAdmin())) redirect("/admin/login");
   const { id } = await params;
   const r = await getReservation(id);
   if (!r) notFound();

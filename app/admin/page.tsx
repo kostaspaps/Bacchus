@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { listReservations } from "@/lib/supabase";
-import { currentAdmin, isAuthConfigured } from "@/lib/supabase-auth";
+import { isAdmin } from "@/lib/admin-auth";
+import { isAdminConfigured } from "@/lib/admin-session";
+import { isDbConfigured, listReservations } from "@/lib/db";
 import { signOut } from "./actions";
 import { StatusBadge } from "./ui";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  if (!isAuthConfigured()) {
+  if (!isAdminConfigured() || !isDbConfigured()) {
     return <Setup />;
   }
-  const admin = await currentAdmin();
-  if (!admin) redirect("/admin/login");
+  if (!(await isAdmin())) redirect("/admin/login");
   const rows = await listReservations();
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Athens" }).format(new Date());
   const upcoming = rows.filter((r) => r.date >= today);
@@ -61,7 +61,7 @@ export default async function AdminPage() {
           <h1 className="font-serif text-3xl m-0">Table requests</h1>
         </div>
         <form action={signOut} className="text-xs text-olive">
-          {admin} · <button className="underline bg-transparent border-0 p-0 text-xs text-wine">Sign out</button>
+          <button className="underline bg-transparent border-0 p-0 text-xs text-wine">Sign out</button>
         </form>
       </header>
       <Table items={upcoming} title="Upcoming" />
@@ -76,7 +76,7 @@ function Setup() {
       <p className="label text-olive m-0 mb-2">Bacchus · admin</p>
       <h1 className="font-serif text-3xl m-0 mb-4">Admin is not configured yet</h1>
       <p className="text-sm leading-relaxed text-ink">
-        Set <code>NEXT_PUBLIC_SUPABASE_URL</code>, <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code> and <code>ADMIN_EMAILS</code>, run the SQL in <code>supabase/migrations</code>, and enable Email (magic link) auth in Supabase. See README.md.
+        Set <code>DATABASE_URL</code> (Neon Postgres via the Vercel integration) and <code>ADMIN_PASSWORD</code> in the project environment variables, then run <code>db/schema.sql</code> once. See README.md.
       </p>
     </div>
   );

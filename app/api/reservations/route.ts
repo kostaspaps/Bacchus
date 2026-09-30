@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { notifyGuestReceived, notifyOwner } from "@/lib/email";
 import { clientIp, hashIp, isRateLimited, recordHit } from "@/lib/rate-limit";
 import { reservationSchema, sanitise, type Reservation } from "@/lib/schema";
-import { insertReservation, isSupabaseConfigured } from "@/lib/supabase";
+import { insertReservation, isDbConfigured } from "@/lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
   let created_at = new Date().toISOString();
   let saved = false;
 
-  if (isSupabaseConfigured()) {
+  if (isDbConfigured()) {
     try {
       const row = await insertReservation({ ...clean, ip_hash: ipHash });
       if (row) {
@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
       console.error("[reservations] insert failed", e);
     }
   } else {
-    console.warn("[reservations] Supabase not configured — request not persisted", { id, ...clean });
+    console.warn("[reservations] DATABASE_URL not set — request not persisted", { id, ...clean });
   }
 
   const reservation: Reservation = { ...clean, id, created_at, status: "pending", website: "" };

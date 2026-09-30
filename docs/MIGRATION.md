@@ -18,9 +18,9 @@ A copy of the old site is in `docs/legacy/bacchus-legacy-site-2026-09-30.zip` (p
 ## 0. Before you start
 
 - [ ] Vercel project deployed and green (`pnpm build` passes; see README).
-- [ ] Env vars set in Vercel (Supabase, Resend/SMTP, OWNER_EMAIL, ADMIN_EMAILS, GTM).
+- [ ] Env vars set in Vercel (DATABASE_URL via Neon, ADMIN_PASSWORD, Resend/SMTP, GTM). `NEXT_PUBLIC_SITE_URL`, phone, WhatsApp, OWNER_EMAIL, FROM_EMAIL are already set.
 - [ ] Reservations table created; test a booking on the Vercel preview URL and confirm the owner email arrives.
-- [ ] In Vercel → Project → Settings → Domains add `bacchus.gr` and `www.bacchus.gr` (Vercel shows the exact values to use in step 5; as of writing: A `76.76.21.21`, CNAME `cname.vercel-dns.com`).
+- [x] Domains `www.bacchus.gr` (primary) and `bacchus.gr` are attached to the Vercel project. Vercel asks for `A www.bacchus.gr 76.76.21.21`; the apex redirects to www once configured.
 
 ## 1. Export the old site (fallback)
 
@@ -51,8 +51,8 @@ In IP.gr DNS:
 
 | Record | Change to |
 |---|---|
-| `bacchus.gr` A | `76.76.21.21` (value shown in Vercel) — delete the old `49.12.120.147` A record for the apex |
-| `www.bacchus.gr` | CNAME → `cname.vercel-dns.com.` (delete its A record) |
+| `www.bacchus.gr` A | `76.76.21.21` (delete its old `49.12.120.147` A record) — primary host |
+| `bacchus.gr` A | `76.76.21.21` (delete the old A record) — Vercel redirects it to www |
 | `mail.bacchus.gr` A | **leave** `49.12.120.147` |
 | MX / SPF / DKIM | **leave** as set in steps 3–4 |
 
@@ -61,12 +61,13 @@ Vercel issues the TLS certificate automatically once DNS resolves (a few minutes
 Verify:
 
 ```bash
+dig +short www.bacchus.gr A      # → 76.76.21.21
 dig +short bacchus.gr A          # → 76.76.21.21
-dig +short www.bacchus.gr CNAME  # → cname.vercel-dns.com.
 dig +short bacchus.gr MX         # → 10 mail.bacchus.gr.
-curl -sI https://bacchus.gr | head -3          # HTTP/2 200, server: Vercel
-curl -sI https://bacchus.gr/index.php | head -1 # 308/301 → /
-curl -s https://bacchus.gr/llms.txt | head -2
+curl -sI https://www.bacchus.gr | head -3        # HTTP/2 200, server: Vercel
+curl -sI https://bacchus.gr | head -1            # 308 → https://www.bacchus.gr
+curl -sI https://www.bacchus.gr/index.php | head -1 # 308 → /
+curl -s https://www.bacchus.gr/llms.txt | head -2
 ```
 
 Send one more test email to `info@bacchus.gr`.
@@ -83,4 +84,4 @@ Send one more test email to `info@bacchus.gr`.
 
 ## Rollback
 
-Set `bacchus.gr` A and `www` A back to `49.12.120.147` at IP.gr. Mail is unaffected because it now uses `mail.bacchus.gr`.
+Set `www.bacchus.gr` A and `bacchus.gr` A back to `49.12.120.147` at IP.gr. Mail is unaffected because it now uses `mail.bacchus.gr`.

@@ -1,6 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { countRecentByIp, isSupabaseConfigured } from "./supabase";
+import { countRecentByIp, isDbConfigured } from "./db";
 
 export const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 };
 
@@ -17,19 +17,19 @@ export function clientIp(headers: Headers) {
   return headers.get("x-real-ip") || "0.0.0.0";
 }
 
-/** True when the caller has exceeded RATE_LIMIT. Uses Supabase when available, else per-instance memory. */
+/** True when the caller has exceeded RATE_LIMIT. Uses the database when available, else per-instance memory. */
 export async function isRateLimited(ipHash: string) {
   const now = Date.now();
   const recent = (memory.get(ipHash) || []).filter((t) => now - t < RATE_LIMIT.windowMs);
   memory.set(ipHash, recent);
   if (recent.length >= RATE_LIMIT.max) return true;
 
-  if (isSupabaseConfigured()) {
+  if (isDbConfigured()) {
     try {
       const n = await countRecentByIp(ipHash, RATE_LIMIT.windowMs);
       if (n >= RATE_LIMIT.max) return true;
     } catch (e) {
-      console.error("[rate-limit] supabase count failed", e);
+      console.error("[rate-limit] db count failed", e);
     }
   }
   return false;

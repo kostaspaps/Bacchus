@@ -1,14 +1,31 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { isAdmin } from "@/lib/admin-auth";
+import { ADMIN_COOKIE, checkPassword, createSessionValue, sessionCookieOptions } from "@/lib/admin-session";
+import { updateReservationStatus } from "@/lib/db";
 import { notifyGuestStatus } from "@/lib/email";
 import { RESERVATION_STATUSES, type ReservationStatus } from "@/lib/schema";
-import { updateReservationStatus } from "@/lib/supabase";
-import { currentAdmin, supabaseServer } from "@/lib/supabase-auth";
+
+export async function signIn(formData: FormData) {
+  const password = String(formData.get("password") || "");
+  if (!(await checkPassword(password))) {
+    redirect("/admin/login?error=1");
+  }
+  const store = await cookies();
+  store.set(ADMIN_COOKIE, await createSessionValue(), sessionCookieOptions);
+  redirect("/admin");
+}
+
+export async function signOut() {
+  const store = await cookies();
+  store.set(ADMIN_COOKIE, "", { ...sessionCookieOptions, maxAge: 0 });
+  redirect("/admin/login");
+}
 
 export async function setStatus(formData: FormData) {
-  const admin = await currentAdmin();
-  if (!admin) redirect("/admin/login");
+  if (!(await isAdmin())) redirect("/admin/login");
   const id = String(formData.get("id") || "");
   const status = String(formData.get("status") || "") as ReservationStatus;
   if (!id || !RESERVATION_STATUSES.includes(status)) return;
@@ -22,10 +39,4 @@ export async function setStatus(formData: FormData) {
   }
   revalidatePath("/admin");
   revalidatePath(`/admin/reservations/${id}`);
-}
-
-export async function signOut() {
-  const sb = await supabaseServer();
-  await sb?.auth.signOut();
-  redirect("/admin/login");
 }
