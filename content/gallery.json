@@ -1,0 +1,20 @@
+[
+  { "src": "/images/restaurant/bacchus-from-the-sea-2.jpg", "alt": { "en": "Bacchus from the water", "el": "Ο Βάκχος από τη θάλασσα" }, "tag": "place", "cat": "place", "ratio": "4/3", "pos": "center 58%" },
+  { "src": "/images/heritage/dimitris-big-fish-terrace.jpg", "alt": { "en": "Dimitris and the catch of the day", "el": "Ο Δημήτρης και η ψαριά της ημέρας" }, "tag": "family", "cat": "place", "ratio": "3/4", "pos": "center 40%", "arch": true },
+  { "src": "/images/food/two-sea-bream-plated.jpg", "alt": { "en": "Two sea bream, grilled", "el": "Δύο τσιπούρες στη σχάρα" }, "tag": "food", "cat": "food", "ratio": "4/5", "pos": "center" },
+  { "src": "/images/restaurant/pier-from-the-roof.jpg", "alt": { "en": "The pier from the roof", "el": "Η προβλήτα από την ταράτσα" }, "tag": "place", "cat": "place", "ratio": "3/2", "pos": "center 60%" },
+  { "src": "/images/food/grilled-prawns.jpg", "alt": { "en": "Grilled prawns", "el": "Γαρίδες στη σχάρα" }, "tag": "food", "cat": "food", "ratio": "3/4", "pos": "center 55%", "arch": true },
+  { "src": "/images/restaurant/greek-night-dancers-2.jpg", "alt": { "en": "Corfiot dancing at dusk", "el": "Κερκυραϊκός χορός το σούρουπο" }, "tag": "place", "cat": "place", "ratio": "3/4", "pos": "center" },
+  { "src": "/images/food/red-mullet-plate.jpg", "alt": { "en": "Red mullet", "el": "Μπαρμπούνια" }, "tag": "food", "cat": "food", "ratio": "3/4", "pos": "center 45%" },
+  { "src": "/images/restaurant/wedding-table-sea.jpg", "alt": { "en": "Blue & white by the sea", "el": "Μπλε & λευκό δίπλα στη θάλασσα" }, "tag": "place", "cat": "place", "ratio": "4/5", "pos": "center 40%" },
+  { "src": "/images/heritage/dimitris-with-guest.jpg", "alt": { "en": "Dimitris showing a guest the fish", "el": "Ο Δημήτρης δείχνει το ψάρι σε καλεσμένη" }, "tag": "family", "cat": "place", "ratio": "3/4", "pos": "center 35%" },
+  { "src": "/images/food/gyros-and-grilled-calamari.jpg", "alt": { "en": "Gyros & grilled calamari", "el": "Γύρος & καλαμάρι σχάρας" }, "tag": "food", "cat": "food", "ratio": "4/5", "pos": "center" },
+  { "src": "/images/restaurant/messonghi-bay.jpg", "alt": { "en": "Messonghi bay", "el": "Ο κόλπος της Μεσογγής" }, "tag": "place", "cat": "place", "ratio": "3/2", "pos": "center" },
+  { "src": "/images/food/galaktoboureko-tray.jpg", "alt": { "en": "Galaktoboureko", "el": "Γαλακτομπούρεκο" }, "tag": "food", "cat": "food", "ratio": "1", "pos": "center 45%", "arch": true },
+  { "src": "/images/restaurant/wedding-ceremony-beach.jpg", "alt": { "en": "A wedding on the sand", "el": "Ένας γάμος στην άμμο" }, "tag": "place", "cat": "place", "ratio": "3/4", "pos": "center 45%", "arch": true },
+  { "src": "/images/food/chicken-souvlaki.jpg", "alt": { "en": "Chicken souvlaki", "el": "Σουβλάκι κοτόπουλο" }, "tag": "food", "cat": "food", "ratio": "3/4", "pos": "center" },
+  { "src": "/images/heritage/chef-dimitris-fish.jpg", "alt": { "en": "In the kitchen today", "el": "Στην κουζίνα σήμερα" }, "tag": "family", "cat": "place", "ratio": "4/5", "pos": "center 30%" },
+  { "src": "/images/food/whole-fish-grilled-veg-2.jpg", "alt": { "en": "Sea bream, grilled", "el": "Τσιπούρα στη σχάρα" }, "tag": "food", "cat": "food", "ratio": "1", "pos": "center 45%" },
+  { "src": "/images/restaurant/entrance-arch-boardwalk.jpg", "alt": { "en": "The boardwalk entrance", "el": "Η είσοδος από τον ξύλινο διάδρομο" }, "tag": "place", "cat": "place", "ratio": "3/4", "pos": "center 60%", "arch": true },
+  { "src": "/images/food/baklava-tray.jpg", "alt": { "en": "Baklava, from the tray", "el": "Μπακλαβάς, από το ταψί" }, "tag": "food", "cat": "food", "ratio": "4/5", "pos": "center 55%" }
+]

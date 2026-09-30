@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bacchus Restaurant — bacchus.gr
 
-## Getting Started
+Family-run Greek seafood taverna on Messonghi Beach, Corfu. This repo is the production website built from the Claude Design handoff in [`docs/handoff`](docs/handoff).
 
-First, run the development server:
+**Stack:** Next.js 15 (App Router, TypeScript) · Tailwind v4 · Motion · Supabase · Resend / SMTP · Vercel.
+
+## Pages
+
+| Route | What |
+|---|---|
+| `/` · `/el` | Homepage (EN / GR). Story, today's catch, menu, gallery, evenings, reviews, find us, booking sheet |
+| `/book` · `/el/book` | Google Ads landing: fast table request → WhatsApp |
+| `/admin` | Owner admin (Supabase magic link): list requests, change status, one-tap WhatsApp reply templates EN/GR |
+| `/api/reservations` | `POST` — validates, rate-limits, stores the request, emails owner + guest |
+| `/llms.txt` · `/sitemap.xml` · `/robots.txt` | Agent / SEO endpoints |
+
+Legacy PHP URLs (`/index.php`, `/photos.php`, `/contact.php`, `/images/Food/*`) 301 to the new site — see `next.config.ts`.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+cp .env.example .env.local   # fill in what you have; the site works with none of it
+pnpm dev                     # http://localhost:3000  (Greek: /el)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Without Supabase / email configured the booking flow still works: the request is validated and the guest is handed to WhatsApp; the summary shows "not saved — send via WhatsApp".
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content the owner can edit (no code)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | Contents |
+|---|---|
+| `content/catch.json` | Today's catch list (EN/EL) |
+| `content/plates.json` | Six menu categories: title, photo, description (EN/EL). No prices unless verified |
+| `content/reviews.json` | Guest quotes |
+| `content/gallery.json` · `content/album.json` | Gallery photos + heritage album captions |
+| `content/hours.json` | Season dates and opening hours → also feed JSON-LD |
+| `content/messages.json` | WhatsApp / email templates (EN/EL) |
+| `public/images/**` | Photos and video (filenames are final; referenced in JSON-LD) |
 
-## Learn More
+Copy and UI strings live in `lib/i18n.ts` (`en` / `el`). Greek review notes: [`docs/TRANSLATION.md`](docs/TRANSLATION.md).
 
-To learn more about Next.js, take a look at the following resources:
+## Set-up checklist (one-time)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Supabase** — create a project, run `supabase/migrations/0001_reservations.sql` in the SQL editor, enable *Authentication → Email* (magic link), set `Site URL` to `https://bacchus.gr` and add `https://bacchus.gr/auth/callback` to redirect URLs. Fill `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAILS`.
+2. **Email** — sign up at resend.com, add domain `bacchus.gr`, add its 3 DNS records at IP.gr, set `RESEND_API_KEY`, `OWNER_EMAIL`, `FROM_EMAIL`. (Fallback: `SMTP_*` for the IP.gr mailbox.)
+3. **Vercel** — import the GitHub repo, add the env vars above, deploy. Add the domain `bacchus.gr` + `www.bacchus.gr`.
+4. **DNS / go-live** — follow [`docs/MIGRATION.md`](docs/MIGRATION.md) step by step (the old server also hosts the mailbox — read the warning there first).
+5. **Analytics** — `NEXT_PUBLIC_GTM_ID` (or GA4 / Meta Pixel). Events pushed to `dataLayer`: `view_booking`, `start_booking`, `submit_booking`, `whatsapp_booking_click`, `directions_click`, `phone_click`, `menu_view`. UTM / gclid persist in `sessionStorage` and are stored with each request.
+6. **Google** — Search Console (verify, submit sitemap), Business Profile links: website `/`, menu `/#menu`, reservations `/book?utm_source=google&utm_medium=gbp`. Google Ads final URL `/book`, conversions `submit_booking` + `whatsapp_booking_click`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+```bash
+pnpm dev / build / start / lint
+node scripts/generate-assets.mjs   # regenerate favicon, apple icon, OG images
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Open items (from the handoff)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Vector redraw of the emblem (source is 83×70 px) — currently used ≤ 83 px only.
+- Hero drone video is 7.4 MB; re-export trimmed & compressed (~2–3 MB, 1080p H.264). It only loads on desktop and only plays in view.
+- High-res scan of Dimitris & Yana (currently the 800×600 legacy photo, now hosted locally at `public/images/heritage/dimitris-and-yana-early-years.jpg`).
+- Instagram / Facebook URLs (`NEXT_PUBLIC_INSTAGRAM_URL`, `NEXT_PUBLIC_FACEBOOK_URL`), Google Place ID for a live rating.
+- `lib/config.ts` → `GEO` is approximate; copy the exact pin from Google Business Profile.
+- Cormorant Garamond has no Greek glyphs; Greek headlines fall back to GFS Didot (loaded via `next/font`). Swap if a different Greek serif is preferred.

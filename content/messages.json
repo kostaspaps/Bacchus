@@ -1,0 +1,38 @@
+{
+  "whatsappRequest": {
+    "en": "Hello Bacchus 👋\nI would like to request a table.\n\nName: {name}\nDate: {date}\nTime: {time}\nGuests: {guests}\nHotel: {hotel}\nPhone: {phone}\nSpecial request: {notes}\n\nPlease confirm my reservation.\nThank you!",
+    "el": "Γεια σας, Βάκχος 👋\nΘα ήθελα να κάνω αίτημα για τραπέζι.\n\nΌνομα: {name}\nΗμερομηνία: {date}\nΏρα: {time}\nΆτομα: {guests}\nΞενοδοχείο: {hotel}\nΤηλέφωνο: {phone}\nΕιδικό αίτημα: {notes}\n\nΠαρακαλώ επιβεβαιώστε την κράτησή μου.\nΕυχαριστώ!"
+  },
+  "ownerReplyConfirm": {
+    "en": "Hello {name}, your table for {guests} on {date} at {time} is confirmed — Bacchus, Messonghi Beach. See you by the sea! 🌊",
+    "el": "Γεια σας {name}, το τραπέζι σας για {guests} άτομα στις {date} στις {time} επιβεβαιώθηκε — Βάκχος, παραλία Μεσογγής. Τα λέμε δίπλα στη θάλασσα! 🌊"
+  },
+  "ownerReplyDecline": {
+    "en": "Hello {name}, unfortunately we are full on {date} at {time}. We could offer {alternatives} — would one of those work for you? — Bacchus",
+    "el": "Γεια σας {name}, δυστυχώς είμαστε πλήρεις στις {date} στις {time}. Θα μπορούσαμε να σας προτείνουμε {alternatives} — σας βολεύει κάποια από αυτές; — Βάκχος"
+  },
+  "guestEmailSubject": {
+    "en": "We received your table request · Bacchus, Messonghi",
+    "el": "Λάβαμε το αίτημά σας για τραπέζι · Βάκχος, Μεσογγή"
+  },
+  "guestEmailBody": {
+    "en": "Hello {name},\n\nThank you — we received your table request:\n\nDate: {date}\nTime: {time}\nGuests: {guests}\nHotel: {hotel}\nPhone: {phone}\nSpecial request: {notes}\n\nThis is a request, not a confirmation. Bacchus will confirm by WhatsApp ({whatsapp}) or phone ({phone_restaurant}) — nothing is reserved until you hear from us.\n\nSee you by the sea,\nYana & family\nBacchus Restaurant · Messonghi Beach · Corfu",
+    "el": "Γεια σας {name},\n\nΕυχαριστούμε — λάβαμε το αίτημά σας για τραπέζι:\n\nΗμερομηνία: {date}\nΏρα: {time}\nΆτομα: {guests}\nΞενοδοχείο: {hotel}\nΤηλέφωνο: {phone}\nΕιδικό αίτημα: {notes}\n\nΠρόκειται για αίτημα, όχι επιβεβαίωση. Ο Βάκχος θα επιβεβαιώσει μέσω WhatsApp ({whatsapp}) ή τηλεφώνου ({phone_restaurant}) — τίποτα δεν έχει κρατηθεί μέχρι να επικοινωνήσουμε μαζί σας.\n\nΤα λέμε δίπλα στη θάλασσα,\nΓιάννα & οικογένεια\nΕστιατόριο Βάκχος · Παραλία Μεσογγής · Κέρκυρα"
+  },
+  "guestConfirmedSubject": {
+    "en": "Your table is confirmed · Bacchus, Messonghi",
+    "el": "Το τραπέζι σας επιβεβαιώθηκε · Βάκχος, Μεσογγή"
+  },
+  "guestConfirmedBody": {
+    "en": "Hello {name},\n\nYour table for {guests} on {date} at {time} is confirmed.\n\nBacchus Restaurant · Messonghi Beach, 49080 Corfu · at the end of the boardwalk, on the sand.\nDirections: {directions}\n\nIf your plans change, just reply on WhatsApp ({whatsapp}).\n\nSee you by the sea,\nYana & family",
+    "el": "Γεια σας {name},\n\nΤο τραπέζι σας για {guests} άτομα στις {date} στις {time} επιβεβαιώθηκε.\n\nΕστιατόριο Βάκχος · Παραλία Μεσογγής, 49080 Κέρκυρα · στην άκρη του ξύλινου διαδρόμου, πάνω στην άμμο.\nΟδηγίες: {directions}\n\nΑν αλλάξουν τα σχέδιά σας, απαντήστε μας στο WhatsApp ({whatsapp}).\n\nΤα λέμε δίπλα στη θάλασσα,\nΓιάννα & οικογένεια"
+  },
+  "guestDeclinedSubject": {
+    "en": "About your table request · Bacchus, Messonghi",
+    "el": "Σχετικά με το αίτημά σας · Βάκχος, Μεσογγή"
+  },
+  "guestDeclinedBody": {
+    "en": "Hello {name},\n\nUnfortunately we cannot offer a table for {guests} on {date} at {time}. Please message us on WhatsApp ({whatsapp}) and we will find another time that works.\n\nYana & family\nBacchus Restaurant · Messonghi Beach · Corfu",
+    "el": "Γεια σας {name},\n\nΔυστυχώς δεν μπορούμε να προσφέρουμε τραπέζι για {guests} άτομα στις {date} στις {time}. Στείλτε μας μήνυμα στο WhatsApp ({whatsapp}) και θα βρούμε μια άλλη ώρα που να σας βολεύει.\n\nΓιάννα & οικογένεια\nΕστιατόριο Βάκχος · Παραλία Μεσογγής · Κέρκυρα"
+  }
+}
