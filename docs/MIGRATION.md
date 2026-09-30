@@ -5,11 +5,11 @@
 | Record | Value | Meaning |
 |---|---|---|
 | `bacchus.gr` A | `49.12.120.147` | Old Apache/PHP site |
-| `www.bacchus.gr` A | `49.12.120.147` | Same server |
+| `www.bacchus.gr` CNAME | `bacchus.gr.` | Follows whatever `bacchus.gr` points to |
 | `bacchus.gr` MX | `0 bacchus.gr.` | **Mail is delivered to the same IP as the website** |
-| `mail.bacchus.gr` A | `49.12.120.147` | Mail host name exists already |
+| `mail.bacchus.gr` CNAME | `bacchus.gr.` | **Also follows `bacchus.gr` — must become an A record before the switch** |
 | TXT (SPF) | `v=spf1 ip4:49.12.120.147 ip4:142.132.254.13 +a +mx +ip4:195.201.241.83 ~all` | |
-| Nameservers | `ns311.ipdns.gr`, `ns312.ipdns.gr` | DNS is managed in the IP.gr control panel |
+| Nameservers | `ns133.ipdns.gr`, `ns134.ipdns.gr` | DNS is managed in the IP.gr control panel |
 
 > ⚠️ **Do not simply change the A record.** Because the MX record points at `bacchus.gr` itself, moving the A record to Vercel would send `info@bacchus.gr` mail to Vercel and it would bounce. Steps 3–4 below fix the mail records *before* the switch.
 
@@ -32,7 +32,7 @@ In IP.gr DNS, set TTL of the `bacchus.gr` and `www` A records to 300 s so the sw
 
 ## 3. Separate mail from web (IP.gr DNS panel)
 
-1. Confirm `mail.bacchus.gr` A → `49.12.120.147` exists (it does). If IP.gr's mail server has a different hostname, use that.
+1. `mail.bacchus.gr` is currently a **CNAME to `bacchus.gr`**. Delete that CNAME and create an **A record** `mail.bacchus.gr → 49.12.120.147`. (If IP.gr's mail server has a different hostname, use that instead.) Without this, mail would follow the web switch to Vercel.
 2. Change **MX**: `bacchus.gr  MX 10 mail.bacchus.gr.` (replace the `0 bacchus.gr.` entry).
 3. Update **SPF** TXT: remove `+a` (it would start pointing at Vercel), keep the IPs:
    `v=spf1 ip4:49.12.120.147 ip4:142.132.254.13 +mx ip4:195.201.241.83 ~all`
@@ -51,9 +51,9 @@ In IP.gr DNS:
 
 | Record | Change to |
 |---|---|
-| `www.bacchus.gr` A | `76.76.21.21` (delete its old `49.12.120.147` A record) — primary host |
+| `www.bacchus.gr` | Either keep the CNAME → `bacchus.gr.` (it will follow), or replace it with CNAME → `cname.vercel-dns.com.` — primary host |
 | `bacchus.gr` A | `76.76.21.21` (delete the old A record) — Vercel redirects it to www |
-| `mail.bacchus.gr` A | **leave** `49.12.120.147` |
+| `mail.bacchus.gr` A | **leave** `49.12.120.147` (created in step 3) |
 | MX / SPF / DKIM | **leave** as set in steps 3–4 |
 
 Vercel issues the TLS certificate automatically once DNS resolves (a few minutes to ~1 h).
