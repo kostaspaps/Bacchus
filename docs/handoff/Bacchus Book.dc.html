@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Book a table — Bacchus, dinner by the sea in Messonghi, Corfu</title>
+<meta name="description" content="Request a table at Bacchus, a family-run seafood taverna on Messonghi Beach, Corfu. Fresh fish, Corfiot cuisine, waterfront tables. Confirmed by WhatsApp.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4EFE5;color:#1B0B11;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:#4A1028}
+button,input,textarea{font-family:inherit}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</helmet>
+<main style="min-height:100svh;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,512px),1fr))">
+  <section data-screen-label="Book hero" style="position:{{ heroPos }};top:0;align-self:start;background:#1B0B11;color:#F4EFE5;min-height:{{ heroH }};display:flex;flex-direction:column;justify-content:space-between;padding:24px clamp(20px,4vw,56px) 40px;overflow:hidden">
+    <img src="images/restaurant/wedding-table-sea.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%;opacity:.55" />
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(27,11,17,.5) 0%,rgba(27,11,17,.2) 45%,rgba(27,11,17,.92) 100%)"></div>
+    <a href="Bacchus Homepage.dc.html" style="position:relative;font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.18em;display:flex;align-items:center;gap:12px"><img src="images/heritage/bacchus_logo.png" alt="" aria-hidden="true" style="width:34px;height:29px;object-fit:contain" />BACCHUS</a>
+    <div style="position:relative;animation:rise .9s ease both">
+      <p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.8;margin:0 0 16px">Messonghi Beach • Corfu</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,88px);line-height:.95;margin:0 0 20px">Dinner by the sea<br>in Messonghi.</h1>
+      <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin:0 0 20px">Fresh fish • Corfiot cuisine • Waterfront tables</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px;opacity:.85">
+        <a href="tel:+302661075301" onClick="{{ trackPhone }}" style="border-bottom:1px solid rgba(244,239,229,.4)">+30 26610 75301</a>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Bacchus+Restaurant+Messonghi+Corfu" target="_blank" rel="noopener" onClick="{{ trackDirections }}" style="border-bottom:1px solid rgba(244,239,229,.4)">Directions ↗</a>
+        <span>Open daily 09:00 – 23:00</span>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Book form" style="padding:clamp(28px,4vw,56px) clamp(20px,4vw,56px) 120px;display:flex;align-items:center">
+    <div style="width:100%;max-width:520px;margin:0 auto;animation:rise .9s .15s ease both">
+      <sc-if value="{{ stepForm }}" hint-placeholder-val="{{ true }}">
+      <p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0 0 8px">Table request</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4vw,48px);line-height:1;margin:0 0 28px">Book your table</h2>
+      <form onSubmit="{{ submitBooking }}" style="display:grid;gap:20px">
+        <input type="text" name="website" tabIndex="-1" autoComplete="off" value="{{ f.hp }}" onChange="{{ setHp }}" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
+        <label style="display:grid;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Name *
+          <input required value="{{ f.name }}" onChange="{{ setName }}" placeholder="Your name" style="border:0;border-bottom:1px solid #1B0B11;background:transparent;padding:12px 0;font-size:18px;font-family:'Cormorant Garamond',serif;outline:none;letter-spacing:0;text-transform:none;color:#1B0B11" />
+        </label>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px">
+          <label style="display:grid;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Date *
+            <input type="date" required min="{{ today }}" value="{{ f.date }}" onChange="{{ setDate }}" style="border:0;border-bottom:1px solid #1B0B11;background:transparent;padding:12px 0;font-size:16px;outline:none;color:#1B0B11" />
+          </label>
+          <div style="display:grid;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Guests *
+            <div style="display:flex;align-items:center;gap:20px;border-bottom:1px solid #1B0B11;padding:6px 0">
+              <button type="button" onClick="{{ decGuests }}" aria-label="Fewer guests" style="width:44px;height:44px;border:1px solid #1B0B11;background:transparent;font-size:18px;color:#1B0B11;cursor:pointer">−</button>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#1B0B11;min-width:24px;text-align:center">{{ f.guests }}</span>
+              <button type="button" onClick="{{ incGuests }}" aria-label="More guests" style="width:44px;height:44px;border:1px solid #1B0B11;background:transparent;font-size:18px;color:#1B0B11;cursor:pointer">+</button>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Time *
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ slots }}" as="s" hint-placeholder-count="8">
+            <button type="button" onClick="{{ s.pick }}" style="padding:12px 14px;min-height:44px;border:1px solid #1B0B11;font-size:13px;letter-spacing:.04em;background:{{ s.bg }};color:{{ s.fg }};transition:all .2s;cursor:pointer">{{ s.time }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <label style="display:grid;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Hotel / accommodation
+          <input value="{{ f.hotel }}" onChange="{{ setHotel }}" placeholder="Where are you staying in Corfu?" style="border:0;border-bottom:1px solid #1B0B11;background:transparent;padding:12px 0;font-size:16px;outline:none;letter-spacing:0;text-transform:none;color:#1B0B11" />
+        </label>
+        <label style="display:grid;gap:8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#596441">WhatsApp / phone *
+          <input type="tel" required value="{{ f.phone }}" onChange="{{ setPhone }}" placeholder="+44 …" style="border:0;border-bottom:1px solid #1B0B11;background:transparent;padding:12px 0;font-size:16px;outline:none;letter-spacing:0;text-transform:none;color:#1B0B11" />
+        </label>
+        <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:13px;color:#B55A3C">{{ formError }}</p></sc-if>
+        <button type="submit" style="background:#4A1028;color:#F4EFE5;border:0;padding:20px;min-height:56px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background .3s" style-hover="background:#1B0B11">Request table</button>
+        <p style="margin:0;font-size:12px;line-height:1.6;color:#596441">A <strong>request</strong>, not a confirmation. Bacchus replies on WhatsApp — usually within the hour during opening times.</p>
+      </form>
+      </sc-if>
+      <sc-if value="{{ stepSummary }}" hint-placeholder-val="{{ false }}">
+      <p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0 0 8px">Table request · one step left</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4vw,48px);line-height:1;margin:0 0 28px">{{ stepTitle }}</h2>
+      <dl style="margin:0 0 24px;display:grid;grid-template-columns:auto 1fr;gap:12px 24px;font-size:15px;border-top:1px solid rgba(27,11,17,.15);padding-top:20px">
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Name</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ f.name }}</dd>
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Guests</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ guestsLabel }}</dd>
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Date</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ dateLabel }}</dd>
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Time</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ f.time }}</dd>
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Hotel</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ hotelLabel }}</dd>
+        <dt style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#596441;padding-top:4px">Phone</dt><dd style="margin:0;font-family:'Cormorant Garamond',serif;font-size:24px">{{ f.phone }}</dd>
+      </dl>
+      <a href="{{ waLink }}" target="_blank" rel="noopener" onClick="{{ trackWa }}" style="display:flex;align-items:center;justify-content:center;background:#4A1028;color:#F4EFE5;padding:20px;min-height:56px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:background .3s" style-hover="background:#1B0B11">Send via WhatsApp ↗</a>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px">
+        <button onClick="{{ backToForm }}" style="background:none;border:0;padding:0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid #1B0B11;cursor:pointer">← Edit</button>
+        <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#596441">Saved · {{ savedStatus }}</span>
+      </div>
+      </sc-if>
+      <p style="margin:40px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#596441;display:flex;gap:16px;flex-wrap:wrap"><a href="Bacchus Homepage.dc.html#menu" onClick="{{ trackMenu }}" style="border-bottom:1px solid currentColor">See the menu</a><a href="Bacchus Homepage.dc.html" style="border-bottom:1px solid currentColor">Explore Bacchus</a></p>
+    </div>
+  </section>
+</main>
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:60;display:{{ barDisplay }};grid-template-columns:1fr 1fr 1.6fr;background:#1B0B11;color:#F4EFE5;border-top:1px solid rgba(244,239,229,.15);padding-bottom:env(safe-area-inset-bottom)">
+  <a href="tel:+302661075301" onClick="{{ trackPhone }}" style="display:flex;align-items:center;justify-content:center;min-height:56px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600">Call</a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Bacchus+Restaurant+Messonghi+Corfu" target="_blank" rel="noopener" onClick="{{ trackDirections }}" style="display:flex;align-items:center;justify-content:center;min-height:56px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border-left:1px solid rgba(244,239,229,.15)">Directions</a>
+  <a href="#top" onClick="{{ scrollToForm }}" style="display:flex;align-items:center;justify-content:center;background:#4A1028;color:#F4EFE5;min-height:56px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600">Book</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step:'form', formError:'', saved:'pending', f:{ name:'', date:'', time:'', guests:2, hotel:'', phone:'', hp:'' } };
+  CONFIG = { WHATSAPP_NUMBER:'306934693732', SLOTS:['18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00'] };
+  componentDidMount(){ this.track('view_booking', this.utm()); this.started = false; this.onResize = () => this.setState({isMobile: window.innerWidth < 1024}); window.addEventListener('resize', this.onResize); this.onResize(); }
+  componentWillUnmount(){ window.removeEventListener('resize', this.onResize); }
+  track(ev, data){ (window.dataLayer = window.dataLayer || []).push({event:ev, ...(data||{})}); }
+  utm(){ const p = new URLSearchParams(location.search); const o = {}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid'].forEach(k => { if (p.get(k)) o[k] = p.get(k); }); return o; }
+  setF(k){ return e => { if (!this.started){ this.started = true; this.track('start_booking'); } this.setState(s => ({ f:{...s.f,[k]: e && e.target ? e.target.value : e}, formError:'' })); }; }
+  waText(){ const f = this.state.f; return `Hello Bacchus 👋\nI would like to request a table.\n\nName: ${f.name}\nDate: ${f.date}\nTime: ${f.time}\nGuests: ${f.guests}\nHotel: ${f.hotel||'-'}\nPhone: ${f.phone}\n\nPlease confirm my reservation.\nThank you!`; }
+  submit(e){
+    e.preventDefault(); const f = this.state.f;
+    if (f.hp) return;
+    if (!f.time) return this.setState({formError:'Please choose a time.'});
+    if (!f.name.trim() || !f.date || !f.phone.trim()) return this.setState({formError:'Name, date and phone are required.'});
+    this.track('submit_booking', {guests:f.guests, ...this.utm()});
+    // Production: POST /api/reservations {…f, language:'en', ...utm, source:'/book'} → Supabase
+    this.setState({step:'summary', saved:'sending'}); setTimeout(() => this.setState({saved:'request recorded'}), 900);
+  }
+  renderVals(){
+    const { f, step } = this.state; const m = this.state.isMobile !== false;
+    const wa = 'https://wa.me/' + this.CONFIG.WHATSAPP_NUMBER;
+    return {
+      today: new Date().toISOString().slice(0,10), heroPos: m ? 'relative' : 'sticky', heroH: m ? '44svh' : '100svh', barDisplay: m ? 'grid' : 'none', stepForm: step==='form', stepSummary: step==='summary',
+      stepTitle: `${f.name.split(' ')[0] || 'Your'}, send your request`,
+      f, setName:this.setF('name'), setDate:this.setF('date'), setHotel:this.setF('hotel'), setPhone:this.setF('phone'), setHp:this.setF('hp'),
+      incGuests:()=>this.setState(s=>({f:{...s.f,guests:Math.min(20,s.f.guests+1)}})), decGuests:()=>this.setState(s=>({f:{...s.f,guests:Math.max(1,s.f.guests-1)}})),
+      slots: this.CONFIG.SLOTS.map(time => ({time, pick:()=>this.setF('time')(time), bg: f.time===time?'#4A1028':'transparent', fg: f.time===time?'#F4EFE5':'#1B0B11'})),
+      formError: this.state.formError, submitBooking: e => this.submit(e), backToForm:()=>this.setState({step:'form'}),
+      guestsLabel: `${f.guests} ${f.guests===1?'guest':'guests'}`, dateLabel: f.date ? new Date(f.date+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'long'}) : '', hotelLabel: f.hotel || '—', savedStatus: this.state.saved,
+      waLink: wa + '?text=' + encodeURIComponent(this.waText()),
+      trackPhone:()=>this.track('phone_click'), trackDirections:()=>this.track('directions_click'), trackWa:()=>this.track('whatsapp_booking_click'), trackMenu:()=>this.track('menu_view'),
+      scrollToForm: e => { e.preventDefault(); const el = document.querySelector('form, dl'); if (el) window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'}); }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#F4EFE5;color:#1B0B11;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:hover{color:#4A1028}</style>
+</helmet>
+<main style="max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,96px) clamp(20px,4vw,56px);display:grid;gap:clamp(56px,8vw,120px)">
+  <header style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:24px;border-bottom:1px solid rgba(74,16,40,.3);padding-bottom:24px">
+    <div><p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0 0 12px">Brand sheet · v1</p><h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1;margin:0">Bacchus</h1></div>
+    <p style="max-width:380px;font-size:14px;line-height:1.6;color:#3a2a30;margin:0">Ancient Mediterranean soul, modern editorial restaurant, Corfu seaside summer. The god of wine is present as emblem and mood — never as a cartoon.</p>
+  </header>
+
+  <section data-screen-label="Wordmark" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+    <div style="grid-column:1 / -1"><p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0">01 / Wordmark &amp; emblem</p></div>
+    <div style="background:#F4EFE5;border:1px solid rgba(74,16,40,.3);padding:56px 32px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center">
+      <img src="images/heritage/bacchus_logo.png" alt="Bacchus emblem" style="width:83px;height:70px" />
+      <p style="font-family:'Cormorant Garamond',serif;font-size:44px;letter-spacing:.2em;margin:0;font-weight:500">BACCHUS</p>
+      <p style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#596441;margin:0">Messonghi • Corfu</p>
+    </div>
+    <div style="background:#1B0B11;color:#F4EFE5;padding:56px 32px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center">
+      <img src="images/heritage/bacchus_logo.png" alt="" style="width:83px;height:70px" />
+      <p style="font-family:'Cormorant Garamond',serif;font-size:44px;letter-spacing:.2em;margin:0;font-weight:500">BACCHUS</p>
+      <p style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.7;margin:0">Βάκχος · Μεσογγή</p>
+    </div>
+    <div style="background:#4A1028;color:#F4EFE5;padding:56px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:44px;letter-spacing:.2em;margin:0;font-weight:300">BACCHUS</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#B89457;margin:0">A taste of Corfu, by the sea.</p>
+    </div>
+    <p style="grid-column:1 / -1;font-size:13px;line-height:1.6;color:#3a2a30;max-width:720px;margin:0">The existing emblem (Bacchus with grapes and barrel) is kept as the heritage mark. It is currently only 83×70 px — a vector redraw is needed before any use above 100 px. Wordmark: Cormorant Garamond, tracked +0.18–0.20em. Arch frames (rounded top) and thin wine-red rules are the recurring graphic device.</p>
+  </section>
+
+  <section data-screen-label="Palette">
+    <p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0 0 24px">02 / Palette</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <sc-for list="{{ colors }}" as="c" hint-placeholder-count="7">
+      <div style="display:grid;gap:10px"><div style="aspect-ratio:1;background:{{ c.hex }};border:1px solid rgba(27,11,17,.12)"></div><p style="margin:0;font-size:13px;font-weight:600">{{ c.name }}</p><p style="margin:0;font-size:12px;color:#596441;font-family:monospace">{{ c.hex }}</p><p style="margin:0;font-size:12px;color:#3a2a30;line-height:1.5">{{ c.use }}</p></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="Type" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px">
+    <div style="grid-column:1 / -1"><p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0">03 / Typography</p></div>
+    <div>
+      <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#596441;margin:0 0 16px">Headlines · Cormorant Garamond Light</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(56px,7vw,104px);line-height:.9;margin:0 0 16px">Where Corfu<br>meets <em style="font-style:italic;color:#4A1028">the sea.</em></p>
+      <p style="font-size:13px;color:#3a2a30;line-height:1.6;margin:0">Weight 300, line-height 0.9–1.02, italics in wine or antique gold for the emotional word. Never bold.</p>
+    </div>
+    <div>
+      <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#596441;margin:0 0 16px">Body &amp; UI · Manrope</p>
+      <p style="font-size:15px;line-height:1.7;color:#3a2a30;margin:0 0 20px;max-width:440px">Fresh fish from local fishermen, Corfiot recipes from the family kitchen, and a table with the Ionian at your feet. Body 15px / 1.7, colour #3a2a30 on ivory.</p>
+      <p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0 0 8px">01 / The story — labels 11px, tracking .24em, olive</p>
+      <button style="background:#4A1028;color:#F4EFE5;border:0;padding:18px 32px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;font-family:inherit">Book a table</button>
+    </div>
+  </section>
+
+  <section data-screen-label="Motifs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px">
+    <div style="grid-column:1 / -1"><p style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#596441;margin:0">04 / Motifs</p></div>
+    <figure style="margin:0;padding:12px;border:1px solid rgba(74,16,40,.3);border-radius:999px 999px 0 0"><div style="aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 0 0"><img src="images/heritage/dimitris-taverna-sign.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%" /></div><figcaption style="padding:12px 4px 0;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#596441;text-align:center">Arch frame · heritage</figcaption></figure>
+    <figure style="margin:0;padding:12px;border:1px solid rgba(74,16,40,.3)"><div style="aspect-ratio:4/5;overflow:hidden"><img src="images/food/the-grill-fresh-fish.jpg" alt="" style="width:100%;height:100%;object-fit:cover" /></div><figcaption style="padding:12px 4px 0;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#596441">Square frame · food &amp; place</figcaption></figure>
+    <div style="position:relative;background:#1B0B11;color:#F4EFE5;padding:32px;display:flex;flex-direction:column;justify-content:end;overflow:hidden;min-height:300px">
+      <svg aria-hidden="true" viewBox="0 0 400 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><path d="M -10 220 C 80 200, 120 80, 200 120 S 300 220, 410 90" fill="none" stroke="#B89457" stroke-width="1" opacity=".7"></path><circle cx="200" cy="120" r="3" fill="#B89457"></circle></svg>
+      <p style="position:relative;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:40px;line-height:.9;margin:0">Food.<br>Wine.<br><em style="font-style:italic;color:#B89457">Sea.</em></p>
+      <p style="position:relative;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin:16px 0 0">Vine line · gold on dark wine</p>
+    </div>
+    <p style="grid-column:1 / -1;font-size:13px;line-height:1.6;color:#3a2a30;max-width:720px;margin:0">Motion: reveals rise 32px over 1.1s (cubic-bezier .2,.7,.2,1); images scale 1.03–1.04 on hover over 1.6s; vine lines draw on with stroke-dashoffset; sea sections carry a slow horizontal wave. Everything respects prefers-reduced-motion.</p>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){ return { colors: [
+    {name:'Deep Wine',hex:'#4A1028',use:'Primary CTA, italics, rules'},
+    {name:'Very Dark Wine',hex:'#1B0B11',use:'Text, dark sections, footer'},
+    {name:'Mediterranean Ivory',hex:'#F4EFE5',use:'Page ground, light text'},
+    {name:'Olive',hex:'#596441',use:'Labels, captions, vine lines'},
+    {name:'Sea Blue',hex:'#315C67',use:'Today\'s Catch section'},
+    {name:'Warm Terracotta',hex:'#B55A3C',use:'Hover on light CTAs, errors'},
+    {name:'Antique Gold',hex:'#B89457',use:'Accent only — italics on dark, vine on wine'}
+  ] }; }
+}
+</script>
+</body>
+</html>

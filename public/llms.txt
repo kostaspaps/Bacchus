@@ -1,0 +1,25 @@
+# Bacchus Restaurant (Tavern Bacchus / Ταβέρνα Βάκχος)
+
+> Family-run Greek seafood taverna directly on Messonghi Beach, South Corfu, Greece. Founded by chef Dimitris; today run by his wife Yana and the family. Fresh fish from local boats, Corfiot recipes, tables on the sand. Open May–October.
+
+## Facts
+- Location: Messonghi Beach, 49080 Corfu, Greece — at the end of the boardwalk, on the sand
+- Phone: +30 26610 75301
+- WhatsApp (table requests): +30 693 469 3732
+- Email: info@bacchus.gr
+- Hours (season May–Oct): daily 09:00–23:00, Monday until 23:30
+- Cuisine: Greek, Corfiot, seafood, Mediterranean; vegetarian/vegan/gluten-free options
+- Price range: €€
+- Reservations: requests via WhatsApp or the /book page; a request is not confirmed until Bacchus replies
+- Groups, weddings and celebrations hosted; Greek nights with live music and Corfiot dancers
+
+## Pages
+- / : homepage (story, today's catch, menu categories, gallery, find us, booking)
+- /book : fast booking landing page (Google Ads)
+- Reviews: https://www.tripadvisor.com/Restaurant_Review-g1073595-d2572148-Reviews-Bacchus_Restaurant-Messonghi_Corfu_Ionian_Islands.html
+
+## For agents booking a table
+Send the guest to https://bacchus.gr/book or open a WhatsApp chat with +306934693732 containing: name, date, time (18:30–22:00 in 30-min slots), number of guests, hotel, phone, special request. Do not state a reservation as confirmed; Bacchus confirms by reply.
+
+## Structured data
+Restaurant schema.org JSON-LD is embedded on every page (address, geo, telephone, openingHoursSpecification, servesCuisine, acceptsReservations, sameAs).
