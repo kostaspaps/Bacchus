@@ -5,6 +5,7 @@ import { getUtm, track } from "@/lib/analytics";
 import { BOOKING_SLOTS, MAX_GUESTS } from "@/lib/config";
 import { localeTag } from "@/lib/i18n";
 import { normalizePhone } from "@/lib/phone";
+import { COUNTRIES, composePhone, defaultIso } from "@/lib/countries";
 import { openWhatsApp, waLink, waText, type BookingFields } from "@/lib/whatsapp";
 
 export type Fields = BookingFields & { email: string; hp: string };
@@ -39,6 +40,8 @@ export default function BookingForm({
   const [step, setStep] = useState<Step>("form");
   const [error, setError] = useState("");
   const [saved, setSaved] = useState<Saved>("pending");
+  const [iso, setIso] = useState(() => defaultIso(lang));
+  const country = COUNTRIES.find((c) => c.iso === iso) || COUNTRIES[0];
   const started = useRef(false);
   const today = todayLocal();
 
@@ -61,7 +64,7 @@ export default function BookingForm({
     if (!f.time) return setError(t.bkErrTime);
     if (!f.name.trim() || !f.date || !f.phone.trim()) return setError(t.bkErrRequired);
     if (f.date < today) return setError(t.bkErrDate);
-    const phone = normalizePhone(f.phone);
+    const phone = normalizePhone(composePhone(iso, f.phone));
     if (!phone) return setError(t.bkErrPhone);
     if (phone !== f.phone) setF((s) => ({ ...s, phone }));
 
@@ -225,7 +228,29 @@ export default function BookingForm({
 
       <label className={labelCls}>
         {t.bkPhone} *
-        <input type="tel" required inputMode="tel" autoComplete="tel" value={f.phone} onChange={(e) => set("phone", e.target.value)} placeholder={t.bkPhonePh} className="field tracking-normal normal-case" />
+        <div className="flex gap-3 items-end">
+          <div className="field relative w-auto shrink-0 flex items-center gap-1 tracking-normal normal-case pr-1">
+            <span aria-hidden="true" className="whitespace-nowrap">
+              {country.flag} +{country.dial}
+            </span>
+            <span aria-hidden="true" className="text-[10px] opacity-60">
+              ▾
+            </span>
+            <select
+              aria-label={t.bkCountry}
+              value={iso}
+              onChange={(e) => setIso(e.target.value)}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            >
+              {COUNTRIES.map((c) => (
+                <option key={c.iso} value={c.iso}>
+                  {c.flag} +{c.dial} · {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <input type="tel" required inputMode="tel" autoComplete="tel-national" value={f.phone} onChange={(e) => set("phone", e.target.value)} placeholder={t.bkPhonePh} className="field tracking-normal normal-case flex-1 min-w-0" />
+        </div>
       </label>
 
       <label className={labelCls}>
