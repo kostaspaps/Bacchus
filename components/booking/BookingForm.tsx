@@ -220,7 +220,7 @@ export default function BookingForm({
         {source === "/book" ? t.bpSubmit : t.bkReview}
       </button>
       <p className="m-0 text-[12px] leading-relaxed text-olive">
-        {source === "/book" ? t.bpNote : <RequestNote text={t.bkRequestNote} word={t.bkRequestWord} />}
+        <RequestNote text={source === "/book" ? t.bpNote : t.bkRequestNote} word={t.bkRequestWord} />
       </p>
     </form>
   );
