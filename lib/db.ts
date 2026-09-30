@@ -70,7 +70,9 @@ export async function getReservation(id: string) {
   return rows[0] ? toReservation(rows[0] as Row) : null;
 }
 
-export async function updateReservationStatus(id: string, status: ReservationStatus) {
-  const rows = await sql()`update reservations set status = ${status}::reservation_status where id = ${id}::uuid returning *`;
-  return rows[0] ? toReservation(rows[0] as Row) : null;
+/** Idempotent: only rows whose status actually differs are updated, so repeated taps never re-send emails. */
+export async function updateReservationStatus(id: string, status: ReservationStatus): Promise<{ reservation: Reservation | null; changed: boolean }> {
+  const rows = await sql()`update reservations set status = ${status}::reservation_status where id = ${id}::uuid and status <> ${status}::reservation_status returning *`;
+  if (rows[0]) return { reservation: toReservation(rows[0] as Row), changed: true };
+  return { reservation: await getReservation(id), changed: false };
 }

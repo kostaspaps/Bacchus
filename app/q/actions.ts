@@ -14,9 +14,9 @@ export async function quickSetStatus(formData: FormData) {
   if (!(await verifyQuickKey(id, k))) redirect("/admin/login");
   if (status !== "confirmed" && status !== "declined") return;
 
-  const updated = await updateReservationStatus(id, status);
+  const { reservation: updated, changed } = await updateReservationStatus(id, status);
   let emailed = false;
-  if (updated) {
+  if (updated && changed) {
     try {
       emailed = await notifyGuestStatus(updated);
     } catch (e) {
@@ -25,5 +25,5 @@ export async function quickSetStatus(formData: FormData) {
   }
   revalidatePath("/admin");
   revalidatePath(`/admin/reservations/${id}`);
-  redirect(`/q/${id}/${k}?done=${status}&emailed=${emailed ? 1 : 0}`);
+  redirect(`/q/${id}/${k}?done=${status}&emailed=${emailed ? 1 : 0}&changed=${changed ? 1 : 0}`);
 }

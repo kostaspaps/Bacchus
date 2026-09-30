@@ -29,8 +29,8 @@ export async function setStatus(formData: FormData) {
   const id = String(formData.get("id") || "");
   const status = String(formData.get("status") || "") as ReservationStatus;
   if (!id || !RESERVATION_STATUSES.includes(status)) return;
-  const updated = await updateReservationStatus(id, status);
-  if (updated && (status === "confirmed" || status === "declined")) {
+  const { reservation: updated, changed } = await updateReservationStatus(id, status);
+  if (updated && changed && (status === "confirmed" || status === "declined")) {
     try {
       await notifyGuestStatus(updated);
     } catch (e) {

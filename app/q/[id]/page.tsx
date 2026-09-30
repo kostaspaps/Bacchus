@@ -24,6 +24,9 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
 
   const done = sp.done === "confirmed" || sp.done === "declined" ? sp.done : null;
   const emailed = sp.emailed === "1";
+  const unchanged = sp.changed === "0";
+  const settled = r.status === "confirmed" || r.status === "declined";
+  const other = r.status === "confirmed" ? "declined" : "confirmed";
   const tel = `tel:${r.phone.replace(/[^\d+]/g, "")}`;
   const replies = ownerReplies(r, r.language);
   const rows: [string, string][] = [
@@ -51,11 +54,19 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
         </span>
       </h1>
 
-      {done ? (
+      {done || settled ? (
         <div className="border border-olive/40 bg-olive/5 p-4 mb-6" role="status">
-          <p className="m-0 font-semibold">{done === "confirmed" ? "✅ Confirmed." : "❌ Declined."}</p>
+          <p className="m-0 font-semibold">{r.status === "confirmed" ? "✅ Confirmed." : r.status === "declined" ? "❌ Declined." : "Updated."}</p>
           <p className="m-0 mt-1 text-[14px]">
-            {r.email ? (emailed ? `The guest was emailed at ${r.email}.` : `Email to ${r.email} could not be sent — please reply on WhatsApp.`) : "The guest gave no email — send the WhatsApp below."}
+            {done && !unchanged
+              ? r.email
+                ? emailed
+                  ? `The guest was emailed at ${r.email}.`
+                  : `Email to ${r.email} could not be sent — please reply on WhatsApp.`
+                : "The guest gave no email — send the WhatsApp below."
+              : r.email
+                ? `Already ${r.status} — the guest was emailed at ${r.email} the first time. No new email sent.`
+                : `Already ${r.status}. The guest gave no email.`}
           </p>
         </div>
       ) : (
@@ -73,7 +84,7 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
         ))}
       </dl>
 
-      {!done && (
+      {!settled && (
         <div className="grid gap-3 mb-8">
           <form action={quickSetStatus}>
             <input type="hidden" name="id" value={r.id} />
@@ -92,6 +103,16 @@ export default async function QuickPage({ params, searchParams }: { params: Prom
             </button>
           </form>
         </div>
+      )}
+      {settled && (
+        <form action={quickSetStatus} className="mb-8">
+          <input type="hidden" name="id" value={r.id} />
+          <input type="hidden" name="k" value={k} />
+          <input type="hidden" name="status" value={other} />
+          <button type="submit" className="bg-transparent border-0 border-b border-wine-dark p-0 text-[12px] tracking-[.18em] uppercase text-wine-dark">
+            Changed your mind? Mark as {other} instead (emails the guest once)
+          </button>
+        </form>
       )}
 
       <div className="grid gap-3">
