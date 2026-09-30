@@ -1,5 +1,7 @@
 # Go-live runbook — replacing the old server IP (IP.gr → Vercel)
 
+> ✅ **Done 2026-09-30 22:13 UTC.** DNS is edited in the hosting plan's **cPanel Zone Editor** (https://ns311.ipdns.gr:2083, user `bacc8274`), not in the IP.gr domain "DNS control" page (that page only offers templates; its *Activate* button would replace the zone — do not use it). Applied: `mail` CNAME → A `49.12.120.147`; MX → `10 mail.bacchus.gr.`; SPF without `+a`; root A → `76.76.21.21` (TTL 300); `www` CNAME left pointing at the root. Vercel: both domains verified, root 308-redirects to www.
+
 **Current state (checked 2026-09-30):**
 
 | Record | Value | Meaning |
