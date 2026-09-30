@@ -46,3 +46,10 @@ next-env.d.ts
 # local env
 .env
 .env.local
+.admin-password.local
+.env*.local
+
+# vendor agent skills injected by the Vercel Neon integration
+.agents/
+.claude/skills/
+skills-lock.json
