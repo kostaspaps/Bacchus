@@ -1,7 +1,8 @@
 import Image from "next/image";
 import BookButton from "@/components/booking/BookButton";
 import TrackedLink from "@/components/ui/TrackedLink";
-import { DIRECTIONS_URL, EMAIL, MAP_EMBED_URL, PHONE_DISPLAY, TEL_LINK, WA_LINK, WHATSAPP_DISPLAY } from "@/lib/config";
+import { DIRECTIONS_URL, EMAIL, MAP_EMBED_URL, PHONE_DISPLAY, TEL_LINK, WHATSAPP_DISPLAY } from "@/lib/config";
+import WhatsAppLink from "@/components/ui/WhatsAppLink";
 import { DICT, type Lang } from "@/lib/i18n";
 
 export default function FindUs({ lang }: { lang: Lang }) {
@@ -52,9 +53,9 @@ export default function FindUs({ lang }: { lang: Lang }) {
           </dd>
           <dt className={dt}>WhatsApp</dt>
           <dd className="m-0">
-            <a href={WA_LINK} target="_blank" rel="noopener" className={link}>
+            <WhatsAppLink className={link}>
               {WHATSAPP_DISPLAY}
-            </a>
+            </WhatsAppLink>
           </dd>
           <dt className={dt}>Email</dt>
           <dd className="m-0">

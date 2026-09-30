@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { randomUUID } from "node:crypto";
 import { notifyGuestReceived, notifyOwner } from "@/lib/email";
+import { notifyOwnerWhatsApp } from "@/lib/whatsapp-notify";
 import { clientIp, hashIp, isRateLimited, recordHit } from "@/lib/rate-limit";
 import { reservationSchema, sanitise, type Reservation } from "@/lib/schema";
 import { insertReservation, isDbConfigured } from "@/lib/db";
@@ -11,8 +12,9 @@ export const dynamic = "force-dynamic";
 /**
  * POST /api/reservations
  * Body: booking fields (see lib/schema.ts). Returns { id, saved }.
- * The WhatsApp hand-off happens client-side; this endpoint records the request
- * and notifies the owner (email) and the guest (email, if given).
+ * Records the request and notifies the owner (email + WhatsApp, if configured) and the
+ * guest (email, if given). The guest does not need WhatsApp; the client-side WhatsApp
+ * hand-off is optional.
  */
 export async function POST(req: NextRequest) {
   let json: unknown;
@@ -80,7 +82,7 @@ export async function POST(req: NextRequest) {
   const reservation: Reservation = { ...clean, id, created_at, status: "pending", website: "" };
 
   // Notifications must never block or fail the guest's flow.
-  const results = await Promise.allSettled([notifyOwner(reservation), notifyGuestReceived(reservation)]);
+  const results = await Promise.allSettled([notifyOwner(reservation), notifyOwnerWhatsApp(reservation), notifyGuestReceived(reservation)]);
   results.forEach((r) => r.status === "rejected" && console.error("[reservations] notify failed", r.reason));
 
   return NextResponse.json({ id, saved });

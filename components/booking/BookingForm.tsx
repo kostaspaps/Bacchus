@@ -4,7 +4,7 @@ import { useLang } from "@/components/LangProvider";
 import { getUtm, track } from "@/lib/analytics";
 import { BOOKING_SLOTS, MAX_GUESTS } from "@/lib/config";
 import { localeTag } from "@/lib/i18n";
-import { waLink, type BookingFields } from "@/lib/whatsapp";
+import { openWhatsApp, waLink, waText, type BookingFields } from "@/lib/whatsapp";
 
 export type Fields = BookingFields & { email: string; hp: string };
 type Step = "form" | "summary";
@@ -115,15 +115,41 @@ export default function BookingForm({
             <Row key={k} k={k} v={v} />
           ))}
         </dl>
-        <a
-          href={waLink(f, lang)}
-          target="_blank"
-          rel="noopener"
-          onClick={() => track("whatsapp_booking_click", { source })}
-          className="btn bg-wine text-ivory hover:bg-wine-dark p-[18px] min-h-14"
-        >
-          {source === "/book" ? t.bpSend : t.bkWhatsApp}
-        </a>
+        {saved === "offline" ? (
+          <a
+            href={waLink(f, lang)}
+            rel="noopener"
+            onClick={(e) => {
+              e.preventDefault();
+              track("whatsapp_booking_click", { source });
+              openWhatsApp(waText(f, lang));
+            }}
+            className="btn bg-wine text-ivory hover:bg-wine-dark p-[18px] min-h-14"
+          >
+            {source === "/book" ? t.bpSend : t.bkWhatsApp}
+          </a>
+        ) : (
+          <div className="grid gap-3 border border-olive/30 bg-olive/5 p-4">
+            <p className="m-0 text-[15px] leading-relaxed text-wine-dark" role="status" aria-live="polite">
+              <span className="text-olive mr-2" aria-hidden="true">
+                ✓
+              </span>
+              {t.bkSentNote}
+            </p>
+            <a
+              href={waLink(f, lang)}
+              rel="noopener"
+              onClick={(e) => {
+                e.preventDefault();
+                track("whatsapp_booking_click", { source });
+                openWhatsApp(waText(f, lang));
+              }}
+              className="justify-self-start bg-transparent border-0 border-b border-wine-dark p-0 text-[12px] tracking-[.18em] uppercase text-wine-dark"
+            >
+              {t.bkAlsoWhatsApp}
+            </a>
+          </div>
+        )}
         <div className="flex justify-between gap-4 flex-wrap">
           <button type="button" onClick={() => setStep("form")} className="bg-transparent border-0 border-b border-wine-dark p-0 text-[12px] tracking-[.18em] uppercase">
             {t.bkEdit}
