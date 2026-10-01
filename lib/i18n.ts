@@ -52,23 +52,23 @@ const en = {
   storyH2: "a kitchen,",
   storyH3: "a beach.",
   story1:
-    "It began with a fisherman. Dimitris's father took his boat out from this beach every morning, and for years the fish on the Bacchus grill came off his nets. Thirty-three years ago Dimitris opened the taverna on the same sand, at the end of the boardwalk in the south of Corfu. Many on the island will tell you he was the best chef in Corfu — the man who met the fishing boats in the morning and carried the day's catch through the terrace to show his guests.",
+    "It began with a fisherman. Nikos, Yanna's father, took his boat out from this beach every morning, and for years the fish on the Bacchus grill came off his nets. Thirty-three years ago Dimitris opened the taverna on the same sand, at the end of the boardwalk in the south of Corfu. Many on the island will tell you he was the best chef in Corfu — the man who met the fishing boats in the morning and carried the day's catch through the terrace to show his guests.",
   story2:
-    "He is no longer with us. Yana and the family — the third generation now — carry on his legacy: the same recipes, the same fish from the same boats, the same tables on the sand.",
+    "He is no longer with us. Yanna and the family — the third generation now — carry on his legacy: the same recipes, the same fish from the same boats, the same tables on the sand.",
   story3:
     "The menu is Corfiot and Greek: whole fish and langoustines from the grill, lamb from the oven, soutzoukakia in tomato, baklava from the tray. Every summer from May to October, lunch runs into evening, and evening runs into the sea.",
   capDimitris: "Dimitris · the man who built Bacchus",
   dimitrisAlt: "Dimitris, founder of Bacchus, laughing with a fresh red snapper under the Taverna Bakchos sign",
-  signature: "— Yana & family",
+  signature: "— Yanna & family",
   yanaLabel: "The host",
-  yanaH1: "Yana keeps",
+  yanaH1: "Yanna keeps",
   yanaH2: "the table.",
   yana1:
-    "From the first summer with Dimitris to today, Yana has welcomed every guest to Bacchus. She knows who wants the table closest to the water, which wine goes with the sea bream, and which regulars are back this year.",
+    "From the first summer with Dimitris to today, Yanna has welcomed every guest to Bacchus. She knows who wants the table closest to the water, which wine goes with the sea bream, and which regulars are back this year.",
   yana2:
     "If you have eaten here before, she will probably remember you. And the fish still arrives the way Dimitris wanted it — whole, that morning, from the boats you can see from your table.",
-  capEarly: "Dimitris & Yana · the early years",
-  earlyAlt: "Dimitris and Yana holding a platter of lobster and langoustines in the early years of Bacchus",
+  capEarly: "Dimitris & Yanna · the early years",
+  earlyAlt: "Dimitris and Yanna holding a platter of lobster and langoustines in the early years of Bacchus",
   family: "The family",
   catchLabel: "02 / From the sea",
   catchH1: "Today's",
@@ -92,7 +92,7 @@ const en = {
   wineLabel: "04 / Bacchus",
   wineQuote: "“A table by the sea deserves a bottle between friends.”",
   wineBody:
-    "Greek wines by the glass or the bottle, chosen to sit beside grilled fish and lamb from the coals. Ask Yana — she knows which one goes with the sunset.",
+    "Greek wines by the glass or the bottle, chosen to sit beside grilled fish and lamb from the coals. Ask Yanna — she knows which one goes with the sunset.",
   galLabel: "05 / The place",
   galH1: "Sand, salt,",
   galH2: "and supper.",
@@ -107,7 +107,7 @@ const en = {
   eveH2: "are cleared,",
   eveH3: "the dancing starts.",
   eveBody:
-    "Greek nights with live music and Corfiot dancers, weddings on the sand, birthdays that run past midnight. Bacchus hosts them all — ask Yana about groups and celebrations.",
+    "Greek nights with live music and Corfiot dancers, weddings on the sand, birthdays that run past midnight. Bacchus hosts them all — ask Yanna about groups and celebrations.",
   planBtn: "Plan a celebration",
   capGreekNight: "Greek night",
   altGreekNight: "Corfiot dancers in traditional dress between the tables at dusk",
@@ -231,7 +231,7 @@ const el: Dict = {
   storyH2: "μια κουζίνα,",
   storyH3: "μια παραλία.",
   story1:
-    "Όλα ξεκίνησαν από έναν ψαρά. Ο πατέρας του Δημήτρη έβγαινε κάθε πρωί με τη βάρκα του από αυτή την παραλία, και για χρόνια το ψάρι στη σχάρα του Βάκχου ερχόταν από τα δίχτυα του. Πριν από τριάντα τρία χρόνια ο Δημήτρης άνοιξε την ταβέρνα στην ίδια άμμο, στην άκρη του ξύλινου διαδρόμου, στη νότια Κέρκυρα. Πολλοί στο νησί θα σας πουν ότι ήταν ο καλύτερος σεφ της Κέρκυρας — ο άνθρωπος που περίμενε τα καΐκια το πρωί και περνούσε την ψαριά της ημέρας μέσα από τη βεράντα για να τη δείξει στους καλεσμένους του.",
+    "Όλα ξεκίνησαν από έναν ψαρά. Ο Νίκος, ο πατέρας της Γιάννας, έβγαινε κάθε πρωί με τη βάρκα του από αυτή την παραλία, και για χρόνια το ψάρι στη σχάρα του Βάκχου ερχόταν από τα δίχτυα του. Πριν από τριάντα τρία χρόνια ο Δημήτρης άνοιξε την ταβέρνα στην ίδια άμμο, στην άκρη του ξύλινου διαδρόμου, στη νότια Κέρκυρα. Πολλοί στο νησί θα σας πουν ότι ήταν ο καλύτερος σεφ της Κέρκυρας — ο άνθρωπος που περίμενε τα καΐκια το πρωί και περνούσε την ψαριά της ημέρας μέσα από τη βεράντα για να τη δείξει στους καλεσμένους του.",
   story2:
     "Δεν είναι πια μαζί μας. Η Γιάννα και η οικογένεια — τρίτη γενιά πλέον — συνεχίζουν την κληρονομιά του: οι ίδιες συνταγές, το ίδιο ψάρι από τα ίδια καΐκια, τα ίδια τραπέζια στην άμμο.",
   story3:

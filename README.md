@@ -63,7 +63,7 @@ node scripts/generate-assets.mjs   # regenerate favicon, apple icon, OG images
 
 - Vector redraw of the emblem (source is 83×70 px) — currently used ≤ 83 px only.
 - Hero drone video is 7.4 MB; re-export trimmed & compressed (~2–3 MB, 1080p H.264). It only loads on desktop and only plays in view.
-- High-res scan of Dimitris & Yana (currently the 800×600 legacy photo, now hosted locally at `public/images/heritage/dimitris-and-yana-early-years.jpg`).
+- High-res scan of Dimitris & Yanna (currently the 800×600 legacy photo, now hosted locally at `public/images/heritage/dimitris-and-yana-early-years.jpg`).
 - Instagram / Facebook URLs (`NEXT_PUBLIC_INSTAGRAM_URL`, `NEXT_PUBLIC_FACEBOOK_URL`), Google Place ID for a live rating.
 - `lib/config.ts` → `GEO` is approximate; copy the exact pin from Google Business Profile.
 - Cormorant Garamond has no Greek glyphs; Greek headlines fall back to Noto Serif Display Light (loaded via `next/font`). Swap if a different Greek serif is preferred.

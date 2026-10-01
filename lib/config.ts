@@ -1,7 +1,7 @@
 /**
  * Site configuration. Public values are read from NEXT_PUBLIC_* env vars with
  * the production defaults from the handoff spec. Never hardcode staff names
- * other than Dimitris (founder) and Yana — see CHEF_NAME.
+ * other than Dimitris (founder) and Yanna — see CHEF_NAME.
  */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://bacchus.gr").replace(/\/$/, "");
 export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "306934693732";

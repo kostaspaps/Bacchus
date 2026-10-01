@@ -20,7 +20,7 @@ Next.js 15 (App Router, TypeScript), Tailwind, Motion, Supabase, Vercel.
 - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 - `RESEND_API_KEY`, `OWNER_EMAIL`, `FROM_EMAIL=bookings@bacchus.gr`
 - `BOOKING_SLOTS=18:30,19:00,19:30,20:00,20:30,21:00,21:30,22:00`
-- `CHEF_NAME` — staff changes; never hardcode names other than Dimitris (founder) and Yana
+- `CHEF_NAME` — staff changes; never hardcode names other than Dimitris (founder) and Yanna
 
 ## Editable content (CMS / JSON)
 - Today's catch: `[{name, how}]`
@@ -40,12 +40,12 @@ id uuid pk · created_at · name · date · time · guests int · hotel · phone
 
 ## Notifications & replying (owner side)
 **Phase 1 (required):** email via Resend (owner signs up at resend.com, verifies bacchus.gr with 3 DNS records at IP.gr) — or fallback to IP.gr SMTP for info@bacchus.gr (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`) using nodemailer. Owner replies to guests from WhatsApp Business app via the wa.me link in the email.
-**WhatsApp:** no Cloud API. Requests arrive on Yana's personal WhatsApp number (`NEXT_PUBLIC_WHATSAPP_NUMBER`); she replies from the normal WhatsApp app. Owner email includes the one-tap wa.me reply link for convenience.
+**WhatsApp:** no Cloud API. Requests arrive on Yanna's personal WhatsApp number (`NEXT_PUBLIC_WHATSAPP_NUMBER`); she replies from the normal WhatsApp app. Owner email includes the one-tap wa.me reply link for convenience.
 
 On every successful `POST /api/reservations`:
 1. **Email to owner** via Resend (`RESEND_API_KEY`, `OWNER_EMAIL`): subject "Booking request · {date} {time} · {guests} pax · {name}"; body lists all fields, language, source/UTM, and two one-tap links: **Reply on WhatsApp** (`https://wa.me/{guest phone E.164}?text=…` prefilled confirmation in guest's language) and **Call**. Include an admin link to `/admin/reservations/{id}`.
 2. **Email to guest** (if email captured; add optional email field to the form) — "We received your request" — restates it is a request, not a confirmation, with WhatsApp/phone.
-3. **WhatsApp**: guest opens wa.me with the prefilled request (client-side, as now) to Yana's number. No API integration.
+3. **WhatsApp**: guest opens wa.me with the prefilled request (client-side, as now) to Yanna's number. No API integration.
 4. Owner reply: from the email link or WhatsApp thread. Minimal `/admin` (Supabase Auth, magic link, owner emails only): list of requests, status toggle (pending → confirmed/declined), prefilled WhatsApp reply templates in EN/GR ("Your table for {guests} on {date} at {time} is confirmed — Bacchus" / decline with alternative slots). Status change triggers a confirmation email to guest if email present.
 
 Templates (EN/GR) live in `/content/messages.json`.
@@ -82,7 +82,7 @@ next/image with AVIF/WebP, `sizes`, lazy below fold; hero `priority`. Video: mut
 
 ## Open items
 - Vector redraw of the Bacchus emblem (source is 83×70 px)
-- Wine photo (HEIC → JPG), high-res original of Dimitris & Yana (old site Food/17 is 800×600)
+- Wine photo (HEIC → JPG), high-res original of Dimitris & Yanna (old site Food/17 is 800×600)
 - Greek translations; Instagram/Facebook URLs; Google Place ID for live rating
 
 ## Image & media manifest
@@ -149,7 +149,7 @@ All assets live under `images/`. Filenames are semantic and final — agents mus
 | images/heritage/grandfather-lobster.png | Homepage | |
 | images/heritage/grandfather-nets.png | Homepage | |
 | images/heritage/lamb-on-the-spit-beach.jpg |  | |
-| https://bacchus.gr/images/Food/17.JPG | Homepage · Yana section | Legacy 800×600 from old site — replace with original scan when available |
+| https://bacchus.gr/images/Food/17.JPG | Homepage · Yanna section | Legacy 800×600 from old site — replace with original scan when available |
 
 Heritage photos (`images/heritage/grandfather-*.png`) were cropped from album scans; re-scan at 600dpi for production.
 Video: `images/restaurant/bacchus-drone.mp4` — hero on desktop only; start at 1.5s (`#t=1.5` + data-start), loop back to 1.5s; re-export trimmed & compressed (~2–3 MB, 1080p H.264) for production.

@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Table request · Bacchus", robots: { index: false, follow: false } };
 
 /**
- * Owner one-tap page, opened from the email / WhatsApp alert on Yana's phone.
+ * Owner one-tap page, opened from the email / WhatsApp alert on Yanna's phone.
  * Signed with the reservation id, so no login is needed. Confirm / decline
  * updates the request and emails the guest; then offers the prefilled WhatsApp reply.
  */

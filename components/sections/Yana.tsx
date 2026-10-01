@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Frame } from "@/components/ui/Frame";
 import { DICT, type Lang } from "@/lib/i18n";
 
-export default function Yana({ lang }: { lang: Lang }) {
+export default function Yanna({ lang }: { lang: Lang }) {
   const t = DICT[lang];
   return (
     <section aria-labelledby="yana-title" className="px-page pb-[clamp(96px,12vw,160px)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,380px),1fr))] gap-[clamp(40px,6vw,110px)] items-center">
